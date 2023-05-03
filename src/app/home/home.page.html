@@ -1,0 +1,27 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+
+    <div class="illustration">
+      <img class="img-home" src="../../assets/illustration/home.png" alt="">
+    </div>
+
+    <strong>Buat Perjalananmu <br>
+      Bersama TravelGo
+    </strong>
+
+    <p class="cp">Terdapat Berbagai Pilihan Travel <br> Ke Berbagai Tempat</p>
+
+
+    <div class="btn-sign d-flex">
+        <div class="button btn-sign-in p-2 ion-activatable ripple-parent rounded-rectangle" [routerLink]="['/login']" routerLinkActive="router-link-active" >
+           Masuk 
+           <ion-ripple-effect></ion-ripple-effect>
+        </div>
+        <div class="button btn-sign-up p-2 ion-activatable ripple-parent rounded-rectangle" [routerLink]="['/register']" routerLinkActive="router-link-active" > 
+          Daftar
+          <ion-ripple-effect></ion-ripple-effect>
+        </div>
+    </div>
+
+  </div>
+</ion-content>

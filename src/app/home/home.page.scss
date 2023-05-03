@@ -1,0 +1,80 @@
+#container {
+  text-align: center;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#container strong {
+  font-family: var(--ion-font-poppins);
+  color: var(--header-text-color);
+  font-size: 25px;
+  line-height: 26px;
+}
+
+#container p {
+  font-size: 16px;
+  line-height: 22px;
+
+  color: #8c8c8c;
+
+  margin: 0;
+}
+
+#container a {
+  text-decoration: none;
+}
+
+
+ion-content{
+  --background: url(../../assets/background.jpg) 0 0/100% 100% no-repeat;
+
+  .illustration {
+
+    margin-bottom: 40px;
+
+    .img-home{
+      width: 300px;
+    }
+  }
+
+  .cp{
+    margin-top: 30px !important;
+    font-family: var(--ion-font-raleway);
+  }
+
+  .btn-sign{
+    width: 70%;
+    height: 55px;
+    border: 5px solid white;
+    border-radius: 15px;
+    margin: 0 auto;
+    margin-top: 20px;
+    font-family: var(--ion-font-poppins);
+
+    .button{
+      position: relative;
+      z-index: 1;
+      background-color: transparent;
+      width: 100%;
+      color: white;
+      font-weight: bold;
+    }
+
+    .btn-sign-in:hover{
+      background-color: white;
+      color: var(--header-text-color);
+    }
+
+    .btn-sign-up:hover{
+      background-color: white;
+      color: var(--header-text-color);
+    }
+
+
+  }
+
+}
