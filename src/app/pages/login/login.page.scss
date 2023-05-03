@@ -39,6 +39,18 @@ ion-content{
                 border: none;
                 border-radius: 10px;
             }
+
+            ion-input{
+                height: 40px;
+                --background:white;
+                border: none;
+                --border-radius: 10px;
+                margin-bottom: 20px;
+                text-align: left;
+                --padding-start: 10px;
+                color: var(--header-text-color);
+                --highlight-color-focused:none;
+            }
             
             ::placeholder {
                 font-family: var(--ion-font-poppins);

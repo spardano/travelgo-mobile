@@ -1,13 +1,41 @@
-<ion-header [translucent]="true">
+<ion-header class="ion-no-border" [translucent]="true">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div id="container">
+    <strong>Ayo</strong>
+    <p>Mulai menggunakan TravelGo <br> Untuk Perjalananmu!</p>
+
+    <div class="form-register">
+      <form action="">
+        <input type="text" class="form-control" placeholder="Username">
+
+        <input type="text" class="form-control" placeholder="Email">
+
+        <app-show-hide-password>
+          <input type="password" class="form-control" placeholder="Password">
+        </app-show-hide-password>
+
+        <app-show-hide-password>
+          <input type="password" class="form-control" placeholder="Komfirmasi Password">
+        </app-show-hide-password>
+
+        <button class="btn btn-sign-in">Daftar</button>
+
+      </form>
+
+      <label>Atau Registrasi Melaui</label>
+      
+      <div class="sign-google">
+        <ion-icon name="logo-google"></ion-icon>
+      </div>
+
+    </div>
+
+  </div>
 </ion-content>
