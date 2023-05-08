@@ -13,16 +13,16 @@
     <p>Selamat Datang <br> Kamu sudah ditunggu!</p>
 
     <div class="form-login">
-      <form action="">
-        <input type="text" class="form-control" placeholder="email / username">
+      <form (ngSubmit)="login()" [formGroup]="credential">
+        <input type="text" class="form-control" placeholder="email" formControlName="email">
 
         <app-show-hide-password>
-          <ion-input type="password" placeholder="Password"></ion-input>
+          <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
         </app-show-hide-password>
 
-        <label class="reset-pwd">Reset Password</label>
+        <label class="reset-pwd" (click)="resetPassword()">Reset Password</label>
 
-        <button class="btn btn-sign-in">Masuk</button>
+        <button type="submit" class="btn btn-sign-in" [disabled]="!credential.valid">Masuk</button>
 
       </form>
 

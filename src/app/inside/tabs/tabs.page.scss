@@ -1,0 +1,8 @@
+.tab-selected {
+    color: var(--ion-theme-10) !important;
+}
+
+ion-tab-button {
+    --background-focused: var(--ion-theme-10);
+    --color-selected: var(--ion-theme-10);
+}

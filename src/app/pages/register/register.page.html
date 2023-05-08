@@ -12,20 +12,59 @@
     <p>Mulai menggunakan TravelGo <br> Untuk Perjalananmu!</p>
 
     <div class="form-register">
-      <form action="">
-        <input type="text" class="form-control" placeholder="Username">
+      <form [formGroup]="RegisterData" (ngSubmit)="register()">
 
-        <input type="text" class="form-control" placeholder="Email">
+        <div class="input-form">
+          <input type="text" class="form-control" placeholder="Nama Lengkap" formControlName="name">
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.name">
+              <div class="error-message" *ngIf="RegisterData.get('name').hasError(validation.type) && (RegisterData.get('name').dirty || RegisterData.get('name').touched)">
+              <small class="text-danger">{{ validation.message }}</small> 
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        
+        <div class="input-form">
+          <input type="text" class="form-control" placeholder="Email" formControlName="email">
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.email">
+              <div class="error-message" *ngIf="RegisterData.get('email').hasError(validation.type) && (RegisterData.get('email').dirty || RegisterData.get('email').touched)">
+               <small class="text-danger">{{ validation.message }}</small> 
+              </div>
+            </ng-container>
+          </div>
+        </div>
 
-        <app-show-hide-password>
-          <input type="password" class="form-control" placeholder="Password">
-        </app-show-hide-password>
+        <div class="input-form">
+          <app-show-hide-password>
+            <input type="password" class="form-control" placeholder="Password" formControlName="password">
+          </app-show-hide-password>
+  
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.password">
+              <div class="error-message" *ngIf="RegisterData.get('password').hasError(validation.type) && (RegisterData.get('password').dirty || RegisterData.get('password').touched)">
+               <small class="text-danger">{{ validation.message }}</small> 
+              </div>
+            </ng-container>
+          </div>
+        </div>
 
-        <app-show-hide-password>
-          <input type="password" class="form-control" placeholder="Komfirmasi Password">
-        </app-show-hide-password>
+        <div class="input-form">
+          <app-show-hide-password>
+            <input type="password" class="form-control" placeholder="Komfirmasi Password" formControlName="cpassword">
+          </app-show-hide-password>
+  
+          <div class="validation-errors">
+            <ng-container *ngFor="let validation of validation_messages.cpassword">
+              <div class="error-message" *ngIf="RegisterData.get('cpassword').hasError(validation.type) && (RegisterData.get('cpassword').dirty || RegisterData.get('cpassword').touched)">
+               <small class="text-danger">{{ validation.message }}</small> 
+              </div>
+            </ng-container>
+          </div>
+        </div>
 
-        <button class="btn btn-sign-in">Daftar</button>
+        <button type="submit" class="btn btn-sign-in">Daftar</button>
 
       </form>
 
