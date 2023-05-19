@@ -24,3 +24,13 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+
+
+.detail-jadwal-drawer{
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding-top: 30%  !important;
+
+    &::part(content) {
+        border-radius: 20px 20px 0 0 !important;
+    }
+}

@@ -21,10 +21,15 @@ const routes: Routes = [
     loadChildren: () => import('./pages/register/register.module').then( m => m.RegisterPageModule)
   },
   {
+    path: 'detail-jadwal-drawer',
+    loadChildren: () => import('./modal/detail-jadwal-drawer/detail-jadwal-drawer.module').then( m => m.DetailJadwalDrawerPageModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./inside/tabs/tabs.module').then( m => m.TabsPageModule),
     canLoad: [AuthenticationGuard]
   },
+
 ];
 
 @NgModule({

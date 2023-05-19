@@ -3,11 +3,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ShowHidePasswordComponent } from './show-hide-password/show-hide-password.component';
+import { CardTicketComponent } from './card-ticket/card-ticket.component';
 
 
 @NgModule({
   declarations: [
-    ShowHidePasswordComponent
+    ShowHidePasswordComponent,
+    CardTicketComponent,
               ],
   imports: [
     FormsModule,
@@ -16,7 +18,8 @@ import { ShowHidePasswordComponent } from './show-hide-password/show-hide-passwo
     IonicModule
   ],
   exports: [
-    ShowHidePasswordComponent
+    ShowHidePasswordComponent,
+    CardTicketComponent,
           ]
 })
 export class SharedComponentsModule { }
