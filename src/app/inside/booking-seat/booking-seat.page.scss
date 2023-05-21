@@ -1,0 +1,131 @@
+label{
+    font-family: 'Raleway';
+    color: var(--header-text-color);
+}
+
+section{
+    margin-top: 30px;
+}
+
+#input-person{
+
+    .wrapper{
+        margin-top: 10px;
+        max-height: 40px;
+        .label-icon{
+            width: 30px;
+            font-size: 20px;
+            padding: 5px;
+            border: 1px solid var(--gray-text-color);
+            border-radius: 10px 0 0 10px;
+        }
+
+        .person{
+            width: 120px;
+            border: 1px solid var(--gray-text-color);
+            border-radius: 0 10px 10px 0;
+            font-size: 15px;
+
+            ion-icon{
+                padding-top: 3px;
+                margin-top: 8px;
+            }
+
+            p{
+                margin-top: 8px;
+            }
+
+        }
+    }
+}
+
+#seat-layout{
+    ion-col{
+        text-align: center;
+    }
+
+    .box-seat{
+        border-radius: 5px;
+        height: 40px;
+        padding: 10px;
+        font-family: 'Raleway';
+        overflow: hidden;
+    }
+
+    .not-availabel{
+        background-color: rgba(228, 39, 39, 0.53);
+    }
+
+    .availabel{
+        background-color: rgba(123, 182, 23, 0.46);
+        position: relative;
+    }
+
+    ion-checkbox{
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        --border-radius:100%;
+        --checkbox-background:transparent;
+        --checkbox-background-checked:green;
+        --border-color-checked:green;
+    }
+
+    .petunjuk{
+        margin-top: 30px;
+        font-family: 'Raleway';
+        color: var(--gray-text-color);
+        font-size: 14px;
+
+        .symbol1{
+            width: 20px;
+            height: 20px;
+            background-color: rgba(123, 182, 23, 0.46);
+            border-radius: 100%;
+            margin-right: 10px;
+        }
+    
+        .symbol2{
+            width: 20px;
+            height: 20px;
+            background-color: rgba(228, 39, 39, 0.53);
+            border-radius: 100%;
+            margin-right: 10px;
+        }
+    }
+
+   
+}
+
+#penjemputan, #pengantaran{
+    
+    ion-item{
+        margin-top: 20px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        padding-top: 5px;
+    }
+
+    .location{
+        font-family: 'Poppins';
+        font-size: 11px;
+        line-height: 10px;
+    }
+
+    .region{
+        font-family: 'Poppins';
+        font-size: 9px;
+    }
+
+    ion-icon{
+        color: var(--primary-color);
+    }
+}
+
+ion-button{
+    --background: var(--red-primary);
+    --border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+

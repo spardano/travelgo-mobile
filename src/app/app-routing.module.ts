@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./inside/tabs/tabs.module').then( m => m.TabsPageModule),
     canLoad: [AuthenticationGuard]
   },
+  {
+    path: 'booking-seat',
+    loadChildren: () => import('./inside/booking-seat/booking-seat.module').then( m => m.BookingSeatPageModule)
+  },
 
 ];
 

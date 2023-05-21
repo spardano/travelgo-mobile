@@ -34,3 +34,18 @@
         border-radius: 20px 20px 0 0 !important;
     }
 }
+
+ion-toolbar{
+    padding-top: env(safe-area-inset-top);
+    --background: var(--primary-gradient);
+    color: white;
+    font-family: 'Poppins';
+    ion-back-button{
+        --color: white;
+    }
+}
+
+.container{
+    padding-left: 20px;
+    padding-right: 20px;
+}

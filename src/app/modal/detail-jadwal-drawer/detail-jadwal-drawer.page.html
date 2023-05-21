@@ -1,5 +1,5 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar>
+  <ion-toolbar class="toolbar-modal">
     <ion-icon slot="end" name="close-circle-outline" (click)="closeModal()"></ion-icon>
   </ion-toolbar>
 </ion-header>
@@ -69,8 +69,8 @@
       </ol>
     </div>
 
-    <ion-button expand="block" fill="solid">
-      Booking Tiket
+    <ion-button expand="block" fill="solid" (click)="directToSeat()" >
+      Pilih Bangku
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
     </ion-button>
 

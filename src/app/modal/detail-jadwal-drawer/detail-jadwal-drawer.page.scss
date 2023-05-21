@@ -1,6 +1,8 @@
-ion-toolbar{
+.toolbar-modal{
+    --background: white !important;
     padding-right: 10px;
     font-size: 20px;
+    color: var(--header-text-color);
 }
 
 .bg-img{
