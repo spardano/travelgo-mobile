@@ -33,6 +33,10 @@ const routes: Routes = [
     path: 'booking-seat',
     loadChildren: () => import('./inside/booking-seat/booking-seat.module').then( m => m.BookingSeatPageModule)
   },
+  {
+    path: 'payment-detail',
+    loadChildren: () => import('./inside/payment-detail/payment-detail.module').then( m => m.PaymentDetailPageModule)
+  },
 
 ];
 

@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HelperService {
 
-  constructor(private toast: ToastController) { }
+  constructor(private toast: ToastController,
+              private alert: AlertController) { }
 
 
   async showToast(msg, color){
@@ -17,4 +18,6 @@ export class HelperService {
     })
     toast.present();
   }
+
+
 }

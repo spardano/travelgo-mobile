@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-label>
+      <app-logo></app-logo>
+      <ion-title>Detail Pembayaran</ion-title>
+    </ion-label>
+
+    <ion-icon slot="end" name="close-circle-outline" (click)="closePage()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <section id="detail-ticket">
+    <ion-accordion-group expand="inset">
+      <ion-accordion value="first">
+        <ion-item slot="header" class="intro">
+          <ion-label>
+            <label>{{data_booking.length}} Tiket</label>
+            <p>Rp. {{totalTicket | number}},-</p>
+          </ion-label>
+          <img src="../../../assets/images/car-op.png" alt="">
+        </ion-item>
+        <div slot="content">
+          <ion-item *ngFor="let tiket of data_booking"  (click)="hapusTiket(tiket.id)" lines="full">
+            <ion-icon name="ticket-outline" slot="start"></ion-icon>
+            <ion-label>
+              <label for="">Bangku {{tiket.kode_bangku}}</label>
+              <p>Rp. {{tiket.harga_tiket | number}},-</p>
+            </ion-label>
+            <ion-icon class="trash" name="trash-outline" slot="end"></ion-icon>
+          </ion-item>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+  </section>
+</ion-content>

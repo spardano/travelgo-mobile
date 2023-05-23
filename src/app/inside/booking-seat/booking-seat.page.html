@@ -22,9 +22,9 @@
           <ion-icon name="people-circle-outline"></ion-icon>
         </div>
         <div class="person d-flex justify-content-evenly">
-          <ion-icon name="add-circle-outline" (click)="increament()"></ion-icon>
-          <p>{{$jumlahPenumpang}}</p>
           <ion-icon name="remove-circle-outline" (click)="decreament()"></ion-icon>
+          <p>{{$jumlahPenumpang}}</p>
+          <ion-icon name="add-circle-outline" (click)="increament()"></ion-icon>
         </div>
       </div>
 
@@ -36,11 +36,12 @@
       <ion-grid fixed>
         <ion-row>
           <ion-col size="{{maxColumnLayout}}" *ngFor="let item of seatLayout.detailBangku">
-            <div *ngIf="item.ketersediaan == 0" class="box-seat not-availabel">
+            <div *ngIf="item.ketersediaan == 0" class="box-seat not-availabel" >
               {{item.kode_bangku}}
             </div>
-            <div *ngIf="item.ketersediaan == 1" class="box-seat availabel" (click)="selectedItem(item)">
+            <div *ngIf="item.ketersediaan == 1" class="box-seat availabel ion-activatable ripple-parent rounded-rectangle" [class]="checkIfDataAlreadySelected(item.id) ? 'selected-seat' : ''" (click)="selectedItem(item)">
               {{item.kode_bangku}}
+              <ion-ripple-effect></ion-ripple-effect>
             </div>
           </ion-col>
         </ion-row>
@@ -87,7 +88,7 @@
       </ion-item>
     </section>
 
-    <ion-button expand="block" fill="solid">
+    <ion-button expand="block" fill="solid" (click)="directToPembayaran()">
       Pembayaran
       <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
     </ion-button>

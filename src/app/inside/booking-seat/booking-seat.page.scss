@@ -61,15 +61,13 @@ section{
         position: relative;
     }
 
-    ion-checkbox{
-        position: absolute;
-        left: 5px;
-        top: 5px;
-        --border-radius:100%;
-        --checkbox-background:transparent;
-        --checkbox-background-checked:green;
-        --border-color-checked:green;
+    .selected-seat{
+        background-color: rgba(82, 82, 225, 0.681);
+        border-width: 2px;
+        border-color: rgb(15, 5, 129);
+        border-style: solid;
     }
+
 
     .petunjuk{
         margin-top: 30px;

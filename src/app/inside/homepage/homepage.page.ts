@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepagePage implements OnInit {
 
+  //data dari api
   data_tiket:any = {
     id: 1,
     perusahaan: 'PT. JASA MULYA TRAVEL',

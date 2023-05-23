@@ -1,0 +1,36 @@
+ion-toolbar{
+    ion-icon{
+        font-size: 20px;
+        margin-right: 20px;
+    }
+}
+
+ion-content{
+    #detail-ticket{
+
+       img{
+        position: absolute;
+        right: -10px;
+        width: 60%;
+       }
+
+       .intro{
+         --background:#7cb61758;
+       }
+
+        label{
+            font-family: 'Poppins';
+            font-size: 12px;
+            color: var(--header-text-color);
+        }
+        p {
+            font-family: 'Raleway';
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .trash{
+            color: red;
+        }
+    }
+}
