@@ -12,6 +12,12 @@ export class PaymentDetailPage implements OnInit {
 
   data_booking:any = [];
   totalTicket = 0;
+  feeTambahan = 0;
+  ppn = 0;
+  biayaAdmin = 6500;
+  totalTagihan = 0;
+  isAlertOnSpot:boolean = false;
+  paymentMethod = 'online';
 
   constructor(private alert: AlertController,
               private router: Router,
@@ -25,6 +31,8 @@ export class PaymentDetailPage implements OnInit {
     this.storage.getData('data-booking').then(res=>{
       this.data_booking = JSON.parse(res);
       this.calculateTotalTicket();
+      this.hitungTotal();
+      // this.hitungPPN();
     })
   }
 
@@ -100,11 +108,48 @@ export class PaymentDetailPage implements OnInit {
     });
     alert.then(alert => alert.present());
 
-   
+  }
+
+  hitungPPN(){
+    let totalHarga = (this.totalTicket + this.feeTambahan)
+    this.ppn = totalHarga * (10/100);
+  }
+
+  hitungTotal(){
+    this.totalTagihan = this.totalTicket + this.feeTambahan + this.biayaAdmin;
   }
 
   refreshDataBooking(){
     this.getDataBooking();
+  }
+
+  handleChange(e){
+    console.log(e.detail.value);
+    if(e.detail.value === 'onspot'){
+      this.isAlertOnSpot = true;
+      this.biayaAdmin = 0;
+      this.hitungTotal();
+    }else{
+      this.isAlertOnSpot = false;
+      this.biayaAdmin = 6500;
+      this.hitungTotal();
+    }
+  }
+
+  checkOut(){
+    
+    //simpan detail order dengan api
+
+
+    if(this.paymentMethod == 'online'){
+
+        //direct ke payment gateway
+        this.router.navigate(['payment-gateway/2'], {replaceUrl: true});
+
+    }else{
+        //lansung ke page notifikasi pemberitahuan berhasil membeli tiket
+    }
+
   }
 
 }

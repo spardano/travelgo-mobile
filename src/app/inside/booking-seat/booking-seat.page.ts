@@ -134,7 +134,6 @@ export class BookingSeatPage implements OnInit {
 
   selectedItem(item){
 
-
     if(this.checkIfDataAlreadySelected(item.id)){
       this.removeSelectedSeat(item.id)
     }else{

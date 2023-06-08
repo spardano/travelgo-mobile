@@ -1,5 +1,7 @@
 {
   "name": "travelgo",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -33,4 +33,75 @@ ion-content{
             color: red;
         }
     }
+
+    #detail-cost{
+
+
+
+        .card {
+            margin-top: 10px;
+        }
+
+        .variabel {
+            font-family: 'Raleway';
+            font-size: 13px;
+        }
+
+        .nilai {
+            text-align: right;
+            font-family: 'Raleway';
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .total-box{
+            border-top: 1px solid var(--gray-text-color);
+        }
+    }
+
+    #payment-method{
+        .card{
+            margin-top: 10px;
+        }
+
+        small{
+            font-size: 10px;
+        }
+    }
+
+    #exp-fee{
+        label{
+            margin-bottom: 10px;
+        }
+
+        .icon{
+            width: 40px;
+        }
+
+        ion-icon{
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-right: 5px;
+        }
+
+        p{
+            font-family: 'Raleway';
+            font-size: 12px;
+        }
+    }
+}
+
+section{
+    margin-top: 20px;
+    label {
+        font-family: 'Poppins';
+        color: var(--header-text-color);
+    }
+}
+
+ion-button{
+    --background: var(--red-primary);
+    --border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

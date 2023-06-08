@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'tabs',
+    redirectTo: 'tabs/homepage',
     pathMatch: 'full'
   },
   {
@@ -37,6 +37,11 @@ const routes: Routes = [
     path: 'payment-detail',
     loadChildren: () => import('./inside/payment-detail/payment-detail.module').then( m => m.PaymentDetailPageModule)
   },
+  {
+    path: 'payment-gateway/:id',
+    loadChildren: () => import('./inside/payment-gateway/payment-gateway.module').then( m => m.PaymentGatewayPageModule)
+  },
+
 
 ];
 
