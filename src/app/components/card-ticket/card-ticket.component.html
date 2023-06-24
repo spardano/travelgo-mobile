@@ -1,11 +1,11 @@
 <ion-item lines="none">
-  <ion-thumbnail slot="start">
-    <img alt="Silhouette of mountains" src="../../../assets/illustration/car-ex.png" />
-  </ion-thumbnail>
-  <ion-label>
-    <label>{{data_tiket.perusahaan}}</label>
-    <p>{{data_tiket.angkutan}} <br> {{data_tiket.trayek}} </p>
-    <small>Rp. {{data_tiket.harga}}</small>
-  </ion-label>
-  <ion-icon (click)="openDetailJadwal(data_tiket.id)" slot="end" name="arrow-forward-outline"></ion-icon>
+    <ion-thumbnail slot="start">
+        <img alt="Silhouette of mountains" src="../../../assets/illustration/car-ex.png" />
+    </ion-thumbnail>
+    <ion-label>
+        <label>{{data_tiket.nama_trayek}}</label>
+        <p>{{data_tiket.nama_angkutan}} <br> {{data_tiket.nama_kelas}} </p>
+        <small>Rp. {{data_tiket.harga}}</small>
+    </ion-label>
+    <ion-icon (click)="openDetailJadwal(data_tiket)" slot="end" name="arrow-forward-outline"></ion-icon>
 </ion-item>

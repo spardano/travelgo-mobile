@@ -17,11 +17,11 @@ export class CardTicketComponent  implements OnInit {
 
   ngOnInit() {}
 
-  async openDetailJadwal(id){
+  async openDetailJadwal(data){
     const modal = await this.modal.create({
       component: DetailJadwalDrawerPage,
       componentProps: {
-        id: id
+        data_jadwal: data
       },
       cssClass: 'detail-jadwal-drawer'
     })

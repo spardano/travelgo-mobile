@@ -31,15 +31,18 @@ const routes: Routes = [
   },
   {
     path: 'booking-seat',
-    loadChildren: () => import('./inside/booking-seat/booking-seat.module').then( m => m.BookingSeatPageModule)
+    loadChildren: () => import('./inside/booking-seat/booking-seat.module').then( m => m.BookingSeatPageModule),
+    canLoad: [AuthenticationGuard]
   },
   {
     path: 'payment-detail',
-    loadChildren: () => import('./inside/payment-detail/payment-detail.module').then( m => m.PaymentDetailPageModule)
+    loadChildren: () => import('./inside/payment-detail/payment-detail.module').then( m => m.PaymentDetailPageModule),
+    canLoad: [AuthenticationGuard]
   },
   {
     path: 'payment-gateway/:id',
-    loadChildren: () => import('./inside/payment-gateway/payment-gateway.module').then( m => m.PaymentGatewayPageModule)
+    loadChildren: () => import('./inside/payment-gateway/payment-gateway.module').then( m => m.PaymentGatewayPageModule),
+    canLoad: [AuthenticationGuard]
   },
 
 

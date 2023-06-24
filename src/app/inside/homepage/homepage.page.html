@@ -1,60 +1,66 @@
 <ion-content [fullscreen]="true">
 
-  <ion-row class="header">
-    <ion-col size="10">
-      <label class="logo">TRAVELGO</label>
-    </ion-col>
-    <ion-col size="2" class="btn-hero">
-      
-    </ion-col>
-  </ion-row>
+    <ion-row class="header">
+        <ion-col size="10">
+            <label class="logo">TRAVELGO</label>
+        </ion-col>
+        <ion-col size="2" class="btn-hero">
 
-  <div class="header-hero">
-    <img class="img-bg" src="../../../assets/images/car-op.png" alt="">
-    <div class="profile">
-      <h3>Nama User</h3>
-      <small>email@user.com</small>
-    </div>
-  </div>
+        </ion-col>
+    </ion-row>
 
-  <div class="container">
-    <div class="card-search">
-      <ion-list>
-     
-        <ion-item>
-          <ion-label><ion-icon name="locate-outline"></ion-icon></ion-label>
-          <ion-input placeholder="Alamat Penjemputan"></ion-input>
-        </ion-item>
-
-        <ion-item>
-          <ion-label><ion-icon name="calendar-outline"></ion-icon></ion-label>
-          <ion-input type="date"></ion-input>
-        </ion-item>
-      
-        <ion-item>
-          <ion-label><ion-icon name="car-outline"></ion-icon></ion-label>
-          <ion-input placeholder="Kota Tujuan"></ion-input>
-        </ion-item>
-
-        <div class="button-cari">
-          <button class="btn btn-prm">Temukan</button>
+    <div class="header-hero">
+        <img class="img-bg" src="../../../assets/images/car-op.png" alt="">
+        <div class="profile">
+            <h3>{{ user.name }}</h3>
+            <small>{{ user.email }}</small>
         </div>
-      
-      </ion-list>
     </div>
 
+    <div class="container">
+        <div class="card-search">
+            <ion-list>
 
-    <div class="list-jadwal">
-      <ion-list>
-        <app-card-ticket [data_tiket]="data_tiket"></app-card-ticket>
-        
-        <app-card-ticket [data_tiket]="data_tiket"></app-card-ticket>
+                <ion-item>
+                    <ion-label>
+                        <ion-icon name="locate-outline"></ion-icon>
+                    </ion-label>
+                    <ion-select label="Kota Keberangkatan">
+                        <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.nama_kab_kota }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
 
-        <app-card-ticket [data_tiket]="data_tiket"></app-card-ticket>
-        
-      </ion-list>
+                <ion-item>
+                    <ion-label>
+                        <ion-icon name="car-outline "></ion-icon>
+                    </ion-label>
+                    <ion-select label="Kota Tujuan">
+                        <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.nama_kab_kota }}</ion-select-option>
+                    </ion-select>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label>
+                        <ion-icon name="calendar-outline "></ion-icon>
+                    </ion-label>
+                    <ion-input type="date "></ion-input>
+                </ion-item>
+
+
+                <div class="button-cari ">
+                    <button class="btn btn-prm ">Temukan</button>
+                </div>
+
+            </ion-list>
+        </div>
+
+
+        <div class="list-jadwal ">
+            <ion-list>
+                <app-card-ticket *ngFor="let data of data_jadwal " [data_tiket]="data "></app-card-ticket>
+            </ion-list>
+        </div>
+
     </div>
-    
-  </div>
 
 </ion-content>

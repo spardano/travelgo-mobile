@@ -140,7 +140,7 @@ export class PaymentDetailPage implements OnInit {
     
     //simpan detail order dengan api
 
-
+    //setelah berhasil disimpan direct ke pembayaran
     if(this.paymentMethod == 'online'){
 
         //direct ke payment gateway
