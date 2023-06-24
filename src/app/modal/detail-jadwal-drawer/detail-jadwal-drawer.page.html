@@ -1,79 +1,79 @@
 <ion-header class="ion-no-border">
-  <ion-toolbar class="toolbar-modal">
-    <ion-icon slot="end" name="close-circle-outline" (click)="closeModal()"></ion-icon>
-  </ion-toolbar>
+    <ion-toolbar class="toolbar-modal">
+        <ion-icon slot="end" name="close-circle-outline" (click)="closeModal()"></ion-icon>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <div class="container">
-    <div class="bg-img">
-      <img src="../../../assets/illustration/car-ex.png" alt="">
+    <div class="container">
+        <div class="bg-img">
+            <img src="../../../assets/illustration/car-ex.png" alt="">
+        </div>
+
+        <div class="desc">
+            <h3>{{ data_jadwal.nama_trayek }}</h3>
+            <p>{{ data_jadwal.nama_angkutan }}</p>
+            <p class="harga">Rp. {{data_jadwal.harga | number }}</p>
+        </div>
+
+        <div class="feature">
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col size="3">
+                        <div class="box-feature">
+                            <ion-icon name="trail-sign-outline"></ion-icon> <br>
+                            <h5 class="first-h5">Keberangkatan</h5>
+                            <p style="font-size: 6px;">{{ data_jadwal.kota_keberangkatan }}</p>
+                            <h5>Tujuan</h5>
+                            <p style="font-size: 6px;">{{ data_jadwal.kota_tujuan }}</p>
+                        </div>
+                    </ion-col>
+                    <ion-col size="3">
+                        <div class="box-feature">
+                            <ion-icon name="time-outline"></ion-icon> <br>
+                            <h5 class="first-h5">Tanggal Berangkat</h5>
+                            <p>{{ data_jadwal.tanggal_berangkat }}</p>
+                            <h5>Waktu</h5>
+                            <p>{{ data_jadwal.waktu_berangkat }}</p>
+                        </div>
+                    </ion-col>
+                    <ion-col size="3">
+                        <div class="box-feature">
+                            <ion-icon name="ticket-outline"></ion-icon> <br>
+                            <h5 class="first-h5">Jenis Kelas</h5>
+                            <p>{{ data_jadwal.nama_kelas }}</p>
+                            <h5>Tiket Tersedia</h5>
+                            <p>{{ data_jadwal.tiket_tersedia }}</p>
+                        </div>
+                    </ion-col>
+                    <ion-col size="3">
+                        <div class="box-feature">
+                            <ion-icon name="cafe-outline"></ion-icon> <br>
+                            <h5 class="first-h5">Amenities</h5>
+                            <p>Air Mineral</p>
+                            <h5>Jumlah Bagasi</h5>
+                            <p>7 Kg</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </div>
+
+        <div class="rules">
+            <h3>Aturan Perjalanan</h3>
+            <ol>
+                <li>Jika penumpang tidak dapat dihubungi atau tidak berada pada lokasi penjemputan, tiket akan hangus dan tidak dapat di refund</li>
+                <li>Penumpang dilarang membawa barang-barang berbahaya ataupun yang membuat penumpang lain merasa tidak nyaman</li>
+                <li>Segala jenis penipuan atau tindakan melawan hukum akan kami serahkan ke pihak yang berwajib</li>
+            </ol>
+        </div>
+
+        <ion-button expand="block" fill="solid" (click)="directToSeat()">
+            Pilih Bangku
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
+
     </div>
 
-    <div class="desc">
-      <h3>PT. JASA MULYA TRAVEL</h3>
-      <p>Kijang Inova</p>
-      <p class="harga">Rp. 300.000</p>
-    </div>
-
-    <div class="feature">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col size="3">
-            <div class="box-feature">
-              <ion-icon name="trail-sign-outline"></ion-icon> <br>
-              <h5 class="first-h5">Keberangkatan</h5>
-              <p>Pekanbaru</p>
-              <h5>Tujuan</h5>
-              <p>Bukittinggi</p>
-            </div>
-          </ion-col>
-          <ion-col size="3">
-            <div class="box-feature">
-              <ion-icon name="time-outline"></ion-icon> <br>
-              <h5 class="first-h5">Keberangkatan</h5>
-              <p>07:00 WIB</p>
-              <h5>Sampai</h5>
-              <p>17:00 WIB</p>
-            </div>
-          </ion-col>
-          <ion-col size="3">
-            <div class="box-feature">
-              <ion-icon name="ticket-outline"></ion-icon> <br>
-              <h5 class="first-h5">Jumlah Titet</h5>
-              <p>7 Tiket</p>
-              <h5>Kursi Tersedia</h5>
-              <p>4 Kursi</p>
-            </div>
-          </ion-col>
-          <ion-col size="3">
-            <div class="box-feature">
-              <ion-icon name="cafe-outline"></ion-icon> <br>
-              <h5 class="first-h5">Amenities</h5>
-              <p>Air Mineral</p>
-              <h5>Jumlah Bagasi</h5>
-              <p>7 Kg</p>
-            </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-
-    <div class="rules">
-      <h3>Aturan Perjalanan</h3>
-      <ol>
-        <li>Jika penumpang tidak dapat dihubungi atau tidak berada pada lokasi penjemputan, tiket akan hangus dan tidak dapat di refund</li>
-        <li>Penumpang dilarang membawa barang-barang berbahaya ataupun yang membuat penumpang lain merasa tidak nyaman</li>
-        <li>Segala jenis penipuan atau tindakan melawan hukum akan kami serahkan ke pihak yang berwajib</li>
-      </ol>
-    </div>
-
-    <ion-button expand="block" fill="solid" (click)="directToSeat()" >
-      Pilih Bangku
-      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-    </ion-button>
-
-  </div>
-  
 </ion-content>

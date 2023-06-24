@@ -9,6 +9,8 @@ import { ModalController } from '@ionic/angular';
 })
 export class DetailJadwalDrawerPage implements OnInit {
 
+  data_jadwal:any;
+
   constructor(private modal: ModalController,
               private router: Router) { }
 
