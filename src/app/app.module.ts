@@ -11,6 +11,7 @@ import { Storage } from '@ionic/storage';
 import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
+import { NativeGeocoder } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 export function playerFactory(){
   return player
@@ -19,7 +20,7 @@ export function playerFactory(){
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, LottieModule.forRoot({player:playerFactory}),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Storage, InAppBrowser],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Storage, InAppBrowser, NativeGeocoder],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

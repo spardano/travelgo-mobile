@@ -43,7 +43,11 @@ const routes: Routes = [
     path: 'payment-gateway/:id',
     loadChildren: () => import('./inside/payment-gateway/payment-gateway.module').then( m => m.PaymentGatewayPageModule),
     canLoad: [AuthenticationGuard]
+  },  {
+    path: 'choose-location',
+    loadChildren: () => import('./modal/choose-location/choose-location.module').then( m => m.ChooseLocationPageModule)
   },
+
 
 
 ];

@@ -1,0 +1,21 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="map" style="height:100%"></div>
+
+  <ion-button (click)="locatePosition()" shape="round">
+    <ion-icon name="locate-outline"></ion-icon>
+  </ion-button>
+
+  <div class="location-desc container">
+    <ion-card>
+      <ion-card-content>
+        {{address}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

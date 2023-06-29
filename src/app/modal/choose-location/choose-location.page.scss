@@ -1,0 +1,21 @@
+ion-button{
+    position: absolute;
+    z-index: 999;
+    top: 80px;
+    right: 20px;
+    --background: white;
+    border-radius: 100%;
+    color: var(--header-text-color);
+
+}
+
+.location-desc{
+    position: absolute;
+    z-index: 9999;
+    bottom: 30px;
+    width: 100%;
+    ion-card{
+        width: 100%;
+        margin: 0 auto;
+    }
+}
