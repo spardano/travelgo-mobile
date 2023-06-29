@@ -32,9 +32,10 @@
 
                 <ion-item>
                     <ion-label>
-                        <ion-icon name="car-outline "></ion-icon>
+
                     </ion-label>
                     <ion-select label="Kota Tujuan">
+                        <ion-icon name="car-outline "></ion-icon>
                         <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.nama_kab_kota }}</ion-select-option>
                     </ion-select>
                 </ion-item>
