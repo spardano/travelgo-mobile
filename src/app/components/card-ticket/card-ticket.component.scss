@@ -6,8 +6,12 @@ ion-item{
 }
 
 ion-thumbnail{
-    width: 100px;
+    width: 80px;
     height: 60px;
+    img{
+        width: 100%;
+        object-fit: contain;
+    }
 }
 ion-label{
     label{

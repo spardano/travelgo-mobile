@@ -3,6 +3,7 @@ import { JadwalService } from 'src/app/services/jadwal.service';
 import { delay, from } from 'rxjs';
 import { Preferences } from '@capacitor/preferences';
 import { USER_LOGIN_KEY } from 'src/app/services/authentication.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-homepage',
@@ -13,39 +14,22 @@ export class HomepagePage implements OnInit {
  user:any = {};
  data_jadwal:any;
  data_area:any;
-  //data dari api
-//   data_jadwal:any = [{
-//     id: 1,
-//     perusahaan: 'PT. JASA MULYA TRAVEL',
-//     angkutan: 'Innova',
-//     harga: '300000',
-//     trayek: 'Pekanbaru - Bukittinggi',
-//     thumbnail: '../../../assets/illustration/car-ex.png'
-//   },
-//   {
-//     id: 2,
-//     perusahaan: 'PT. HUHU TRAVEL',
-//     angkutan: 'Innova',
-//     harga: '300000',
-//     trayek: 'Pekanbaru - Bukittinggi',
-//     thumbnail: '../../../assets/illustration/car-ex.png'
-//   },
-//   {
-//     id: 3,
-//     perusahaan: 'PT. HAHA TRAVEL',
-//     angkutan: 'Avansa',
-//     harga: '300000',
-//     trayek: 'Pekanbaru - Bukittinggi',
-//     thumbnail: '../../../assets/illustration/car-ex.png'
-//   }
-// ]
+ FilterData: FormGroup;
+ today = new Date().toJSON().split('T')[0];
 
-  constructor(private jadwal: JadwalService) { }
+  constructor(private jadwal: JadwalService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
     this.getDataJadwal();
     this.getUser();
     this.getDataArea();
+
+    this.FilterData = this.fb.group({
+      s_tgl_keberangkatan: [''],
+      s_area_keberangkatan: [''],
+      s_area_tujuan:[''],
+    });
   }
 
   async getUser(){
@@ -68,6 +52,15 @@ export class HomepagePage implements OnInit {
     this.jadwal.getKabKotaArea().subscribe(res=>{
       this.data_area = res['data'];
     });
+  }
+
+  filterJadwal(){
+    from(this.jadwal.getDataJadwalApi(this.FilterData.value)).subscribe(res =>{
+      if(res['status']){
+        this.data_jadwal = res['data'];
+        console.log(this.data_jadwal);
+      }
+    })
   }
 
 }
