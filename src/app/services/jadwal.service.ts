@@ -14,7 +14,7 @@ export class JadwalService {
   constructor(private http: HttpClient,
               private helper: HelperService) { }
 
-  async getDataJadwalApi() {
+  async getDataJadwalApi(FilterData = null) {
 
     const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
     const token = res.value;
@@ -26,14 +26,17 @@ export class JadwalService {
       })
     };
 
-    return this.http.get(`${environment.base_api}/pemesanan/jadwal`, httpOptions).pipe(
+    const body = {
+      'filter': FilterData
+    };
+
+    return this.http.post(`${environment.base_api}/pemesanan/jadwal`, body, httpOptions).pipe(
       tap(res=>{
         if(!res['staus']){
           this.helper.showToast(res['message'], 'danger');
         }
       }),
       catchError(e =>{
-        this.helper.showToast(e.message, 'danger');
         throw new Error(e.message);
       })
     ).toPromise();

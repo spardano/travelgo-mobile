@@ -17,7 +17,6 @@ export class RegisterPage implements OnInit {
               private auth: AuthenticationService) { }
 
   ngOnInit() {
-
     this.RegisterData = this.fb.group({
       name: ['', [
         Validators.required, 

@@ -19,40 +19,41 @@
 
     <div class="container">
         <div class="card-search">
-            <ion-list>
+            <form [formGroup]="FilterData" (ngSubmit)="filterJadwal()">
+                <ion-list lines="full">
 
-                <ion-item>
-                    <ion-label>
-                        <ion-icon name="locate-outline"></ion-icon>
-                    </ion-label>
-                    <ion-select label="Kota Keberangkatan">
-                        <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.nama_kab_kota }}</ion-select-option>
-                    </ion-select>
-                </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="locate-outline"></ion-icon>
+                        </ion-label>
+                        <ion-select label="Kota Keberangkatan" formControlName="s_area_keberangkatan">
+                            <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.kabupaten_kota.nama_kab_kota }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
 
-                <ion-item>
-                    <ion-label>
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="compass-outline"></ion-icon>
+                        </ion-label>
+                        <ion-select label="Kota Tujuan" formControlName="s_area_tujuan">
+                            <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.kabupaten_kota.nama_kab_kota }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
 
-                    </ion-label>
-                    <ion-select label="Kota Tujuan">
-                        <ion-icon name="car-outline "></ion-icon>
-                        <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.nama_kab_kota }}</ion-select-option>
-                    </ion-select>
-                </ion-item>
-
-                <ion-item>
-                    <ion-label>
-                        <ion-icon name="calendar-outline "></ion-icon>
-                    </ion-label>
-                    <ion-input type="date "></ion-input>
-                </ion-item>
+                    <ion-item>
+                        <ion-label>
+                            <ion-icon name="calendar-outline"></ion-icon>
+                        </ion-label>
+                        <ion-input aria-label="Tanggal Keberangkatan" type="date" formControlName="s_tgl_keberangkatan" [min]="today"></ion-input>
+                    </ion-item>
 
 
-                <div class="button-cari ">
-                    <button class="btn btn-prm ">Temukan</button>
-                </div>
+                    <div class="button-cari ">
+                        <button type="submit" class="btn btn-prm ">Temukan</button>
+                    </div>
 
-            </ion-list>
+                </ion-list>
+            </form>
         </div>
 
 
