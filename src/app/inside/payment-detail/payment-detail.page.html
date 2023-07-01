@@ -1,160 +1,148 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-label>
-      <app-logo></app-logo>
-      <ion-title>Detail Pembayaran</ion-title>
-    </ion-label>
+    <ion-toolbar>
+        <ion-label>
+            <app-logo></app-logo>
+            <ion-title>Detail Pembayaran</ion-title>
+        </ion-label>
 
-    <ion-icon slot="end" name="close-circle-outline" (click)="closePage()"></ion-icon>
-  </ion-toolbar>
+        <ion-icon slot="end" name="close-circle-outline" (click)="closePage()"></ion-icon>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <section id="detail-ticket">
-    <ion-accordion-group expand="inset">
-      <ion-accordion value="first">
-        <ion-item slot="header" class="intro">
-          <ion-label>
-            <label>{{data_booking.length}} Tiket</label>
-            <p>Rp. {{totalTicket | number}},-</p>
-          </ion-label>
-          <img src="../../../assets/images/car-op.png" alt="">
-        </ion-item>
-        <div slot="content">
-          <ion-item *ngFor="let tiket of data_booking"  (click)="hapusTiket(tiket.id)" lines="full">
-            <ion-icon name="ticket-outline" slot="start"></ion-icon>
-            <ion-label>
-              <label for="">Bangku {{tiket.kode_bangku}}</label>
-              <p>Rp. {{tiket.harga_tiket | number}},-</p>
-            </ion-label>
-            <ion-icon class="trash" name="trash-outline" slot="end"></ion-icon>
-          </ion-item>
+    <section id="detail-ticket">
+        <ion-accordion-group expand="inset">
+            <ion-accordion value="first">
+                <ion-item slot="header" class="intro">
+                    <ion-label>
+                        <label>{{data_booking.length}} Tiket</label>
+                        <p>Rp. {{totalTicket | number}},-</p>
+                    </ion-label>
+                    <img src="../../../assets/images/car-op.png" alt="">
+                </ion-item>
+                <div slot="content">
+                    <ion-item *ngFor="let item of data_booking" (click)="hapusTiket(item.id)" lines="full">
+                        <ion-icon name="ticket-outline" slot="start"></ion-icon>
+                        <ion-label>
+                            <label for="">Bangku {{item.kode_bangku}}</label>
+                            <p>Rp. {{item.tiket.harga_tiket | number}},-</p>
+                        </ion-label>
+                        <ion-icon class="trash" name="trash-outline" slot="end"></ion-icon>
+                    </ion-item>
+                </div>
+            </ion-accordion>
+        </ion-accordion-group>
+    </section>
+    <section id="detail-cost">
+
+        <div class="container">
+            <label>Detail Penagihan</label>
+            <div class="card">
+                <ion-grid fixed>
+                    <ion-row>
+                        <ion-col class="variabel" size="6">Booking Tiket</ion-col>
+                        <ion-col class="nilai" size="6">Rp. {{totalTicket | number}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col class="variabel" size="6">Fee Tambahan</ion-col>
+                        <ion-col class="nilai" size="6">Rp. {{feeTambahan | number}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col class="variabel" size="6">Biaya Admin</ion-col>
+                        <ion-col class="nilai" size="6">Rp. {{biayaAdmin | number}}</ion-col>
+                    </ion-row>
+                    <ion-row class="total-box">
+                        <ion-col class="variabel" size="6">Total</ion-col>
+                        <ion-col class="nilai" size="6">Rp. {{totalTagihan | number}}</ion-col>
+                    </ion-row>
+
+                </ion-grid>
+            </div>
         </div>
-      </ion-accordion>
-    </ion-accordion-group>
-  </section>
-  <section id="detail-cost">
 
-    <div class="container">
-      <label>Detail Penagihan</label>
-      <div class="card">
-        <ion-grid fixed>
-          <ion-row>
-            <ion-col class="variabel" size="6">Booking Tiket</ion-col>
-            <ion-col class="nilai" size="6">Rp. {{totalTicket | number}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="variabel" size="6">Fee Tambahan</ion-col>
-            <ion-col class="nilai" size="6">Rp. {{feeTambahan | number}}</ion-col>
-          </ion-row>
-          <ion-row>
-            <ion-col class="variabel" size="6">Biaya Admin</ion-col>
-            <ion-col class="nilai" size="6">Rp. {{biayaAdmin | number}}</ion-col>
-          </ion-row>
-          <ion-row class="total-box">
-            <ion-col class="variabel" size="6">Total</ion-col>
-            <ion-col class="nilai" size="6">Rp. {{totalTagihan | number}}</ion-col>
-          </ion-row>
+    </section>
 
-        </ion-grid>
-      </div>
-    </div>
+    <section id="payment-method">
+        <div class="container">
+            <label>Metode Pembayaran</label>
 
-  </section>
-
-  <section id="payment-method">
-    <div class="container">
-      <label>Metode Pembayaran</label>
-
-      <ion-item class="card" lines="none">
-        <ion-select 
-          justify="space-between"
-          (ionChange)="handleChange($event)"
-          label="Metode"
-          [(ngModel)]="paymentMethod"
-          >
-          <ion-select-option value="online">Online (Midtrans)</ion-select-option>
-          <ion-select-option value="onspot">Lansung Ditempat</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <small *ngIf="isAlertOnSpot"> <b>Pembayaran ditempat</b> terhitung sebagai <b>pembelian tidak pasti</b>.
+            <ion-item class="card" lines="none">
+                <ion-select justify="space-between" (ionChange)="handleChange($event)" label="Metode" [(ngModel)]="paymentMethod">
+                    <ion-select-option value="online">Online (Midtrans)</ion-select-option>
+                    <ion-select-option value="onspot">Lansung Ditempat</ion-select-option>
+                </ion-select>
+            </ion-item>
+            <small *ngIf="isAlertOnSpot"> <b>Pembayaran ditempat</b> terhitung sebagai <b>pembelian tidak pasti</b>.
         Bookingan anda dapat dibatalkan untuk mendukung kelancaran
         dalam keberangkatan.</small>
 
-    </div>
-
-  </section>
-
-  <section id="exp-fee">
-      <div class="container">
-        <label>Ketentuan Biaya (Fee) Tambahan</label>
-
-        <div class="item d-flex">
-          <div class="icon">
-            <ion-icon name="map-outline"></ion-icon>
-          </div>
-          <p>Lokasi penjemputan atau pengantaran berada diluar area yang dicover
-            oleh jasa transportasi</p>
         </div>
 
-        <div class="item d-flex">
-          <div class="icon">
-            <ion-icon name="bag-add-outline"></ion-icon>
-          </div>
-          <p>Jumlah barang bawaan melebihi ketentuan  yang telah disebutkan.
-            (kelebihan ini akan dikenakan lansung dilokasi)</p>
+    </section>
+
+    <section id="exp-fee">
+        <div class="container">
+            <label>Ketentuan Biaya (Fee) Tambahan</label>
+
+            <div class="item d-flex">
+                <div class="icon">
+                    <ion-icon name="map-outline"></ion-icon>
+                </div>
+                <p>Lokasi penjemputan atau pengantaran berada diluar area yang dicover oleh jasa transportasi</p>
+            </div>
+
+            <div class="item d-flex">
+                <div class="icon">
+                    <ion-icon name="bag-add-outline"></ion-icon>
+                </div>
+                <p>Jumlah barang bawaan melebihi ketentuan yang telah disebutkan. (kelebihan ini akan dikenakan lansung dilokasi)</p>
+            </div>
+
+
         </div>
+    </section>
 
+    <section id="exp-fee">
+        <div class="container">
+            <label>Ketentuan Pembatalan</label>
 
-      </div>
-  </section>
+            <div class="item d-flex">
+                <div class="icon">
+                    <ion-icon name="warning-outline"></ion-icon>
+                </div>
+                <p>Pengembalian uang dalam pembatalan hanya 70% dari total pembayaran keseluruhan
+                </p>
+            </div>
 
-  <section id="exp-fee">
+            <div class="item d-flex">
+                <div class="icon">
+                    <ion-icon name="hourglass-outline"></ion-icon>
+                </div>
+                <p>Pembatalan hanya dapat dilakukan paling lambat 2 jam sebelum keberangkatan </p>
+            </div>
+
+            <div class="item d-flex">
+                <div class="icon">
+                    <ion-icon name="call-outline"></ion-icon>
+                </div>
+                <p>Penumpang tidak menjawab telfon driver saat penjemputan atau tidak diketahui keberaadaannya akan dibatalkan tanpa pengembalian uang (refund) </p>
+            </div>
+
+            <div class="item d-flex">
+                <div class="icon">
+                    <ion-icon name="bag-add-outline"></ion-icon>
+                </div>
+                <p>Penumpang membawa barang yang berlebihan dan tidak dapat diangkut oleh mobil travel, pembatalan akan dilakukan ditempat dengan pengembalian dana 70% dari total pembayaran </p>
+            </div>
+
+        </div>
+    </section>
+
     <div class="container">
-      <label>Ketentuan Pembatalan</label>
-
-      <div class="item d-flex">
-        <div class="icon">
-          <ion-icon name="warning-outline"></ion-icon>
-        </div>
-        <p>Pengembalian uang dalam pembatalan hanya 70% dari total pembayaran
-          keseluruhan</p>
-      </div>
-
-      <div class="item d-flex">
-        <div class="icon">
-          <ion-icon name="hourglass-outline"></ion-icon>
-        </div>
-        <p>Pembatalan hanya dapat dilakukan paling lambat 2 jam sebelum keberangkatan </p>
-      </div>
-
-      <div class="item d-flex">
-        <div class="icon">
-          <ion-icon name="call-outline"></ion-icon>
-        </div>
-        <p>Penumpang tidak menjawab telfon driver saat penjemputan atau tidak
-          diketahui keberaadaannya akan dibatalkan tanpa 
-          pengembalian uang (refund) </p>
-      </div>
-
-      <div class="item d-flex">
-        <div class="icon">
-          <ion-icon name="bag-add-outline"></ion-icon>
-        </div>
-        <p>Penumpang membawa barang yang berlebihan dan
-          tidak dapat diangkut oleh mobil travel, pembatalan akan 
-          dilakukan ditempat dengan pengembalian dana 70% dari total
-          pembayaran </p>
-      </div>
-
+        <ion-button class="btn-payment" expand="block" fill="solid" (click)="checkOut()">
+            Komfirmasi & Bayar
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
     </div>
-  </section>
-
-  <div class="container">
-    <ion-button class="btn-payment" expand="block" fill="solid" (click)="checkOut()">
-      Komfirmasi & Bayar
-      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-    </ion-button>
-  </div>
 </ion-content>

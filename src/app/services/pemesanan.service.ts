@@ -1,23 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HelperService } from './helper.service';
 import { Preferences } from '@capacitor/preferences';
 import { ACCESS_TOKEN_KEY } from './authentication.service';
 import { environment } from 'src/environments/environment';
 import { catchError, tap } from 'rxjs/operators';
-import { HelperService } from './helper.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class JadwalService {
+export class PemesananService {
 
   constructor(private http: HttpClient,
               private helper: HelperService) { }
 
-  async getDataJadwalApi(FilterData = null) {
-
+  async storeBooking(total_harga){
     const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
     const token = res.value;
+    const res_p = await Preferences.get({key: 'data-booking'});
+    const detail_booking = JSON.parse(res_p.value);
     
     const httpOptions = {
       headers: new HttpHeaders({
@@ -27,10 +28,11 @@ export class JadwalService {
     };
 
     const body = {
-      'filter': FilterData
+      'detail_booking': detail_booking,
+      'total_harga': total_harga
     };
 
-    return this.http.post(`${environment.base_api}/pemesanan/jadwal`, body, httpOptions).pipe(
+    return this.http.post(`${environment.base_api}/pemesanan/store-booking`, body, httpOptions).pipe(
       tap(res=>{
         if(!res['status']){
           this.helper.showToast(res['message'], 'danger');
@@ -40,20 +42,5 @@ export class JadwalService {
         throw new Error(e.message);
       })
     ).toPromise();
-
-  }
-
-  getKabKotaArea(){
-    return this.http.get(`${environment.base_api}/guest/get-kabkota`).pipe(
-      tap(res=>{
-        if(!res['status']){
-          this.helper.showToast(res['message'], 'danger');
-        }
-      }),
-      catchError(e =>{
-        throw new Error();
-      })
-    )
-  }
-  
+  }            
 }

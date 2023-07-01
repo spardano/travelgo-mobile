@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Preferences } from '@capacitor/preferences';
+import { from } from 'rxjs';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { SeatService } from 'src/app/services/seat.service';
 
 @Component({
   selector: 'app-booking-seat',
@@ -11,107 +14,122 @@ import { HelperService } from 'src/app/services/helper.service';
 export class BookingSeatPage implements OnInit {
 
   public $jumlahPenumpang = 1;
-  public seatLayout = {
-    id:1,
-    id_angkutan:1,
-    jumlah_baris: 3,
-    jumlah_kolom: 3,
+  public seatLayout:any = {};
+  // public seatLayout = {
+  //   id:1,
+  //   id_angkutan:1,
+  //   jumlah_baris: 3,
+  //   jumlah_kolom: 3,
 
-    //data yang didapatkan dari api
-    detailBangku:[
-      {
-        id:1,
-        id_angkutan:1,
-        baris:1,
-        kolom:1,
-        kode_bangku: 'CC',
-        ketersediaan: 1,
-        harga_tiket: 200000
-      },
-      {
-        id:2,
-        id_angkutan:1,
-        baris:1,
-        kolom:2,
-        kode_bangku: 'KONSOL',
-        ketersediaan: 0,
-        harga_tiket: 200000
-      },
-      {
-        id:3,
-        id_angkutan:1,
-        baris:1,
-        kolom:3,
-        kode_bangku: 'SUPIR',
-        ketersediaan: 0,
-        harga_tiket: 200000
-      },
-      {
-        id:4,
-        id_angkutan:1,
-        baris:2,
-        kolom:1,
-        kode_bangku: 'A1',
-        ketersediaan: 1,
-        harga_tiket: 200000
-      },
-      {
-        id:5,
-        id_angkutan:1,
-        baris:2,
-        kolom:2,
-        kode_bangku: 'A2',
-        ketersediaan: 1,
-        harga_tiket: 200000
-      },
-      {
-        id:6,
-        id_angkutan:1,
-        baris:2,
-        kolom:3,
-        kode_bangku: 'A3',
-        ketersediaan: 1,
-        harga_tiket: 200000
-      },
-      {
-        id:7,
-        id_angkutan:1,
-        baris:3,
-        kolom:1,
-        kode_bangku: 'B1',
-        ketersediaan: 1,
-        harga_tiket: 200000
-      },
-      {
-        id:8,
-        id_angkutan:1,
-        baris:3,
-        kolom:2,
-        kode_bangku: 'B2',
-        ketersediaan: 1,
-        harga_tiket: 200000
-      },
-      {
-        id:9,
-        id_angkutan:1,
-        baris:3,
-        kolom:3,
-        kode_bangku: 'B3',
-        ketersediaan: 0,
-        harga_tiket: 200000
-      }
-    ]
-  }
+  //   //data yang didapatkan dari api
+  //   detailBangku:[
+  //     {
+  //       id:1,
+  //       id_angkutan:1,
+  //       baris:1,
+  //       kolom:1,
+  //       kode_bangku: 'CC',
+  //       ketersediaan: 1,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:2,
+  //       id_angkutan:1,
+  //       baris:1,
+  //       kolom:2,
+  //       kode_bangku: 'KONSOL',
+  //       ketersediaan: 0,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:3,
+  //       id_angkutan:1,
+  //       baris:1,
+  //       kolom:3,
+  //       kode_bangku: 'SUPIR',
+  //       ketersediaan: 0,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:4,
+  //       id_angkutan:1,
+  //       baris:2,
+  //       kolom:1,
+  //       kode_bangku: 'A1',
+  //       ketersediaan: 1,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:5,
+  //       id_angkutan:1,
+  //       baris:2,
+  //       kolom:2,
+  //       kode_bangku: 'A2',
+  //       ketersediaan: 1,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:6,
+  //       id_angkutan:1,
+  //       baris:2,
+  //       kolom:3,
+  //       kode_bangku: 'A3',
+  //       ketersediaan: 1,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:7,
+  //       id_angkutan:1,
+  //       baris:3,
+  //       kolom:1,
+  //       kode_bangku: 'B1',
+  //       ketersediaan: 1,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:8,
+  //       id_angkutan:1,
+  //       baris:3,
+  //       kolom:2,
+  //       kode_bangku: 'B2',
+  //       ketersediaan: 1,
+  //       harga_tiket: 200000
+  //     },
+  //     {
+  //       id:9,
+  //       id_angkutan:1,
+  //       baris:3,
+  //       kolom:3,
+  //       kode_bangku: 'B3',
+  //       ketersediaan: 0,
+  //       harga_tiket: 200000
+  //     }
+  //   ]
+  // }
 
   maxColumnLayout;
   selectedSeat: any = [];
 
   constructor(private helper: HelperService,
+              private seat: SeatService,
               private router: Router,
-              private storage: DataStorageService) { }
+              private storage: DataStorageService,
+              private r: ActivatedRoute) { }
 
   ngOnInit() {
-    this.maxColumnLayout = 12 / this.seatLayout.jumlah_kolom;
+    this.get_bangku();
+  }
+
+  get_bangku(){
+    var id_jadwal = this.r.snapshot.params['id_jadwal'];
+    from(this.seat.getBangku(id_jadwal)).subscribe(res=>{
+      if(res['status']){
+        this.seatLayout = res['data'];
+        console.log(this.seatLayout);
+        
+        this.maxColumnLayout = 12 / this.seatLayout.jumlah_kolom;
+      }
+    });
   }
 
   increament(){
