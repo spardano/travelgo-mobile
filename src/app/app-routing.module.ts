@@ -30,7 +30,7 @@ const routes: Routes = [
     canLoad: [AuthenticationGuard]
   },
   {
-    path: 'booking-seat',
+    path: 'booking-seat/:id_jadwal',
     loadChildren: () => import('./inside/booking-seat/booking-seat.module').then( m => m.BookingSeatPageModule),
     canLoad: [AuthenticationGuard]
   },
@@ -43,7 +43,8 @@ const routes: Routes = [
     path: 'payment-gateway/:id',
     loadChildren: () => import('./inside/payment-gateway/payment-gateway.module').then( m => m.PaymentGatewayPageModule),
     canLoad: [AuthenticationGuard]
-  },  {
+  },
+  {
     path: 'choose-location',
     loadChildren: () => import('./modal/choose-location/choose-location.module').then( m => m.ChooseLocationPageModule)
   },
