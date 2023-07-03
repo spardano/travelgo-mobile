@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
 import { DataStorageService } from 'src/app/services/data-storage.service';
+import { from } from 'rxjs';
+import { PemesananService } from 'src/app/services/pemesanan.service';
 
 @Component({
   selector: 'app-payment-detail',
@@ -21,7 +23,8 @@ export class PaymentDetailPage implements OnInit {
 
   constructor(private alert: AlertController,
               private router: Router,
-              private storage: DataStorageService) { }
+              private storage: DataStorageService,
+              private pemesanan: PemesananService) { }
 
   ngOnInit() {
     this.getDataBooking();
@@ -39,7 +42,7 @@ export class PaymentDetailPage implements OnInit {
   calculateTotalTicket(){
     this.totalTicket = 0;
     this.data_booking.forEach(item => {
-      this.totalTicket = this.totalTicket + item.harga_tiket; 
+      this.totalTicket = this.totalTicket + item.tiket.harga_tiket; 
     });
   }
 
@@ -139,17 +142,18 @@ export class PaymentDetailPage implements OnInit {
   checkOut(){
     
     //simpan detail order dengan api
+    from(this.pemesanan.storeBooking(this.totalTagihan)).subscribe(res=>{
+      if(res['status']){
+         //setelah berhasil disimpan direct ke pembayaran
+          if(this.paymentMethod == 'online'){
 
-    //setelah berhasil disimpan direct ke pembayaran
-    if(this.paymentMethod == 'online'){
+            //direct ke payment gateway
+            this.router.navigate(['payment-gateway/2'], {replaceUrl: true});
 
-        //direct ke payment gateway
-        this.router.navigate(['payment-gateway/2'], {replaceUrl: true});
-
-    }else{
-        //lansung ke page notifikasi pemberitahuan berhasil membeli tiket
-    }
-
+          }else{
+              //lansung ke page notifikasi pemberitahuan berhasil membeli tiket
+          }
+      }
+    });
   }
-
 }

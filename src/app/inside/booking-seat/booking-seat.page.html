@@ -1,98 +1,102 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-label>
-      <app-logo></app-logo>
-      <ion-title>Booking Tempat Duduk</ion-title>
-    </ion-label>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-label>
+            <app-logo></app-logo>
+            <ion-title>Booking Tempat Duduk</ion-title>
+        </ion-label>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
 
-  <div class="container">
+    <div class="container">
 
-    <section id="input-person">
-      <label>Jumlah Penumpang</label>
+        <section id="input-person">
+            <label>Jumlah Penumpang</label>
 
-      <div class="d-flex wrapper">
-        <div class="label-icon">
-          <ion-icon name="people-circle-outline"></ion-icon>
-        </div>
-        <div class="person d-flex justify-content-evenly">
-          <ion-icon name="remove-circle-outline" (click)="decreament()"></ion-icon>
-          <p>{{$jumlahPenumpang}}</p>
-          <ion-icon name="add-circle-outline" (click)="increament()"></ion-icon>
-        </div>
-      </div>
-
-    </section>
-
-    <section id="seat-layout">
-      <label>Pilih Bangku Tersedia</label>
-      
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col size="{{maxColumnLayout}}" *ngFor="let item of seatLayout.detailBangku">
-            <div *ngIf="item.ketersediaan == 0" class="box-seat not-availabel" >
-              {{item.kode_bangku}}
+            <div class="d-flex wrapper">
+                <div class="label-icon">
+                    <ion-icon name="people-circle-outline"></ion-icon>
+                </div>
+                <div class="person d-flex justify-content-evenly">
+                    <ion-icon name="remove-circle-outline" (click)="decreament()"></ion-icon>
+                    <p>{{$jumlahPenumpang}}</p>
+                    <ion-icon name="add-circle-outline" (click)="increament()"></ion-icon>
+                </div>
             </div>
-            <div *ngIf="item.ketersediaan == 1" class="box-seat availabel ion-activatable ripple-parent rounded-rectangle" [class]="checkIfDataAlreadySelected(item.id) ? 'selected-seat' : ''" (click)="selectedItem(item)">
-              {{item.kode_bangku}}
-              <ion-ripple-effect></ion-ripple-effect>
+
+        </section>
+
+        <section id="seat-layout">
+            <label>Pilih Bangku Tersedia</label>
+
+            <ion-grid fixed>
+                <ion-row>
+                    <ion-col size="{{maxColumnLayout}}" *ngFor="let item of seatLayout.detail_bangku">
+                        <div *ngIf="!item.tiket" class="box-seat not-availabel">
+                            {{item.kode_bangku}}
+                        </div>
+                        <div *ngIf="item.tiket && item.tiket.status_tiket != 3" class="box-seat availabel ion-activatable ripple-parent rounded-rectangle" [class]="checkIfDataAlreadySelected(item.id) ? 'selected-seat' : ''" (click)="selectedItem(item)">
+                            {{item.kode_bangku}}
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                        <div *ngIf="item.tiket && item.tiket.status_tiket == 3" class="box-seat not-availabel rounded-rectangle" [class]="checkIfDataAlreadySelected(item.id) ? 'selected-seat' : ''">
+                            {{item.kode_bangku}}
+                            <ion-ripple-effect></ion-ripple-effect>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+
+            <div class="petunjuk">
+                <div class="d-flex">
+                    <div class="symbol1">
+                    </div>
+                    <p>Tersedia</p>
+                </div>
+
+                <div class="d-flex">
+                    <div class="symbol2">
+                    </div>
+                    <p>Tidak Tersedia / Sudah Terjual</p>
+                </div>
             </div>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
 
-      <div class="petunjuk">
-        <div class="d-flex">
-          <div class="symbol1">
-          </div>
-          <p>Tersedia</p>
-        </div>
-  
-        <div class="d-flex">
-          <div class="symbol2">
-          </div>
-          <p>Tidak Tersedia / Sudah Terjual</p>
-        </div>
-      </div>
+        </section>
 
-    </section>
+        <section id="penjemputan">
+            <label>Lokasi Penjemputan</label>
 
-    <section id="penjemputan">
-      <label>Lokasi Penjemputan</label>
+            <ion-item id="open-modal" lines="none">
+                <ion-label>
+                    <p class="location">Pilih lokasi Penjemputan</p>
+                    <p class="region">Belum ada lokasi dipilih</p>
+                </ion-label>
 
-      <ion-item id="open-modal" lines="none">
-        <ion-label>
-          <p class="location">Pilih lokasi Penjemputan</p>
-          <p class="region">Belum ada lokasi dipilih</p>
-        </ion-label>
+                <ion-icon slot="end" name="map-outline"></ion-icon>
+            </ion-item>
 
-        <ion-icon slot="end" name="map-outline"></ion-icon>
-      </ion-item>
+        </section>
 
-    </section>
+        <section id="pengantaran">
+            <label>Lokasi Pengantaran</label>
+            <ion-item lines="none">
+                <ion-label>
+                    <p class="location">Pilih lokasi Penjemputan</p>
+                    <p class="region">Belum ada lokasi dipilih</p>
+                </ion-label>
+                <ion-icon slot="end" name="map-outline"></ion-icon>
+            </ion-item>
+        </section>
 
-    <section id="pengantaran">
-      <label>Lokasi Pengantaran</label>
-      <ion-item lines="none">
-        <ion-label>
-          <p class="location">Pilih lokasi Penjemputan</p>
-          <p class="region">Belum ada lokasi dipilih</p>
-        </ion-label>
-        <ion-icon slot="end" name="map-outline"></ion-icon>
-      </ion-item>
-    </section>
+        <ion-button expand="block" fill="solid" (click)="directToPembayaran()">
+            Komfirmasi Tiket
+            <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+        </ion-button>
 
-    <ion-button expand="block" fill="solid" (click)="directToPembayaran()">
-      Komfirmasi Tiket
-      <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
-    </ion-button>
-
-  </div>
+    </div>
 
 </ion-content>

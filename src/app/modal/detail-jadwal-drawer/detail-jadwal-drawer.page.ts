@@ -15,6 +15,8 @@ export class DetailJadwalDrawerPage implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    console.log(this.data_jadwal);
+    
   }
 
   closeModal(){
@@ -23,7 +25,7 @@ export class DetailJadwalDrawerPage implements OnInit {
 
   directToSeat(){
     this.modal.dismiss();
-    this.router.navigate(['booking-seat']);
+    this.router.navigate(['booking-seat/'+this.data_jadwal.id_jadwal]);
   }
 
 }
