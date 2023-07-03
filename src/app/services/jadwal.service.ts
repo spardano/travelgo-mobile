@@ -32,7 +32,7 @@ export class JadwalService {
 
     return this.http.post(`${environment.base_api}/pemesanan/jadwal`, body, httpOptions).pipe(
       tap(res=>{
-        if(!res['staus']){
+        if(!res['status']){
           this.helper.showToast(res['message'], 'danger');
         }
       }),
@@ -44,7 +44,15 @@ export class JadwalService {
   }
 
   getKabKotaArea(){
-    return this.http.get(`${environment.base_api}/guest/get-kabkota`).pipe(
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'ngrok-skip-browser-warning': 'true',
+      })
+    };
+
+    return this.http.get(`${environment.base_api}/guest/getkabkota`, httpOptions).pipe(
       tap(res=>{
         if(!res['status']){
           this.helper.showToast(res['message'], 'danger');

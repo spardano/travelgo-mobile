@@ -11,18 +11,18 @@ export class DetailJadwalDrawerPage implements OnInit {
 
   data_jadwal:any;
 
-  constructor(private modal: ModalController,
+  constructor(private modalCtrl: ModalController,
               private router: Router) { }
 
   ngOnInit() {
   }
 
   closeModal(){
-    this.modal.dismiss();
+    this.modalCtrl.dismiss();
   }
 
   directToSeat(){
-    this.modal.dismiss();
+    this.modalCtrl.dismiss();
     this.router.navigate(['booking-seat']);
   }
 

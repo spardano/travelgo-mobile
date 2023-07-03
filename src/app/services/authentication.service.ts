@@ -48,7 +48,7 @@ export class AuthenticationService {
       token: token
     }
 
-    await this.http.post(`${this.url}/guest/check-token`, body).pipe(
+    await this.http.post(`${this.url}/guest/checktoken`, body).pipe(
       tap(res=>{
 
         if(res['isExpired']){
@@ -97,7 +97,9 @@ export class AuthenticationService {
           tap(res => {
             if(res['status']){
               this.currentAccessToken = res['access_token'];
-              this.getUserLogin(this.currentAccessToken);
+              // this.getUserLogin(this.currentAccessToken);
+              this.isAuthenticated.next(true);
+              this.getUserLogin(res['access_token']);
               this.help.showToast("Berhasil login, Selamat Datang!", 'success');
             }else{
               this.help.showToast(res['message'], 'danger');
@@ -117,11 +119,12 @@ export class AuthenticationService {
     const httpOptions = {
       headers: new HttpHeaders({
        'Content-Type': 'application/json',
+       'ngrok-skip-browser-warning': 'true',
         Authorization: `${token}`
       })
     }
 
-    this.http.get(`${this.url}/user/get-user`, httpOptions).pipe(
+    this.http.get(`${this.url}/user/getuser`, httpOptions).pipe(
       tap(res => {
         if(res['status']){
             const user = res['data'];
