@@ -1,8 +1,34 @@
 <ion-item lines="none">
     <ion-label>
-        <label>Jurusan</label>
-        <p>Jumlah <br> Harga</p>
-        <small>Total Bayar</small>
+        <label>{{data_booking.nama_trayek}}</label>
+        <ion-grid>
+            <ion-row>
+                <ion-col size="3">
+                    <div>
+                        <p>Tanggal Booking</p>
+                        <p>Jumlah Tiket </p>
+                        <p>Harga Tiket </p>
+                    </div>
+                </ion-col>
+                <ion-col size="3">
+                    <div>
+                        <p>:</p>
+                        <p>:</p>
+                    </div>
+                </ion-col>
+                <ion-col size="3">
+                    <div>
+                        <p>{{data_booking.waktu_booking}}</p>
+                        <p>{{data_booking.jml_tiket}}</p>
+                        <p>{{data_booking.harga_tiket}}</p>
+                    </div>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+
+        <small>Total Bayar : {{ data_booking.total_biaya }}</small>
+
+
+        <ion-button expand="block" fill="solid">Bayar Sekarang</ion-button>
     </ion-label>
-    <!-- <ion-icon (click)="openDetailJadwal(data_tiket)" slot="end" name="arrow-forward-outline"></ion-icon> -->
 </ion-item>
