@@ -6,6 +6,7 @@ import { from } from 'rxjs';
 import { PemesananService } from 'src/app/services/pemesanan.service';
 import { Preferences } from '@capacitor/preferences';
 import { HelperService } from 'src/app/services/helper.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-payment-detail',
@@ -165,7 +166,7 @@ export class PaymentDetailPage implements OnInit {
 
             //direct ke payment gateway
             // this.router.navigate(['payment-gateway/'+res['id_booking']], {replaceUrl: true});
-            const paymentUrl = 'https://af3d-114-10-84-188.ngrok-free.app/payment/'
+            const paymentUrl = `${environment.base_url}/payment/`
             this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number']);
 
           }else{

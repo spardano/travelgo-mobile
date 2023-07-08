@@ -1,6 +1,6 @@
 export const environment = {
   production: false,
-  base_api: 'https://af3d-114-10-84-188.ngrok-free.app/api',
+  base_api: 'https://c3fb-114-10-84-188.ngrok-free.app/api',
   //travel go webservice
   // base_api: 'http://172.25.208.1:8000/api',
   // base_api: 'http://web-travelgo.test/api',
