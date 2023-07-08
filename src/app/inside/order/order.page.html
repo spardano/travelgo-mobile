@@ -17,7 +17,7 @@
     <div class="container">
         <div class="list-jadwal">
             <ion-list>
-                <app-card-booking></app-card-booking>
+                <app-card-booking *ngFor="let data of data_booking " [data_booking]="data "></app-card-booking>
             </ion-list>
         </div>
     </div>
