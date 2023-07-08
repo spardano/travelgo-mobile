@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { ShowHidePasswordComponent } from './show-hide-password/show-hide-password.component';
 import { CardTicketComponent } from './card-ticket/card-ticket.component';
+import { CardBookingComponent } from './card-booking/card-booking.component';
 import { LogoComponent } from './logo/logo.component';
 
 
@@ -11,6 +12,7 @@ import { LogoComponent } from './logo/logo.component';
   declarations: [
     ShowHidePasswordComponent,
     CardTicketComponent,
+    CardBookingComponent,
     LogoComponent
               ],
   imports: [
@@ -22,6 +24,7 @@ import { LogoComponent } from './logo/logo.component';
   exports: [
     ShowHidePasswordComponent,
     CardTicketComponent,
+    CardBookingComponent,
     LogoComponent
           ]
 })
