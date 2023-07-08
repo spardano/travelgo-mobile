@@ -1,0 +1,38 @@
+.header {
+    padding-inline: 10px;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+ion-content {
+    --background: var(--body-color)
+}
+
+.list-jadwal {
+    ion-list {
+        background: transparent;
+    }
+    ion-label {
+        label {
+            font-family: 'Poppins';
+            font-weight: bold;
+            font-size: 12px;
+        }
+        p {
+            font-family: 'Raleway';
+            font-size: 10px;
+            line-height: 14px;
+        }
+        small {
+            font-family: 'Raleway';
+            font-weight: bold;
+            line-height: 14px;
+            color: var(--primary-color);
+        }
+    }
+    ion-icon {
+        color: var(--primary-color);
+    }
+}
