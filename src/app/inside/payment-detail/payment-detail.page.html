@@ -40,6 +40,11 @@
             <label>Detail Penagihan</label>
             <div class="card">
                 <ion-grid fixed>
+                    <!-- <ion-row *ngIf="area_jemput.data && area_antar.data">
+                        <ion-col size="12">
+                            <p style="font-size: 12px;"><b>{{area_jemput.data.kab_kota}} - {{area_antar.data.kab_kota}}</b></p>
+                        </ion-col>
+                    </ion-row> -->
                     <ion-row>
                         <ion-col class="variabel" size="6">Booking Tiket</ion-col>
                         <ion-col class="nilai" size="6">Rp. {{totalTicket | number}}</ion-col>
@@ -47,6 +52,10 @@
                     <ion-row>
                         <ion-col class="variabel" size="6">Fee Tambahan</ion-col>
                         <ion-col class="nilai" size="6">Rp. {{feeTambahan | number}}</ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col class="variabel" size="6">Pengurangan Biaya</ion-col>
+                        <ion-col class="nilai" size="6">Rp. {{tk_biaya | number}}</ion-col>
                     </ion-row>
                     <ion-row>
                         <ion-col class="variabel" size="6">Biaya Admin</ion-col>

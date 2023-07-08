@@ -11,14 +11,14 @@ export class CardTicketComponent  implements OnInit {
 
   @Input() data_tiket: any;
 
-  constructor(private modal:ModalController) { 
+  constructor(private modalCtrl:ModalController) { 
     
   }
 
   ngOnInit() {}
 
   async openDetailJadwal(data){
-    const modal = await this.modal.create({
+    const modal = await this.modalCtrl.create({
       component: DetailJadwalDrawerPage,
       componentProps: {
         data_jadwal: data

@@ -8,7 +8,7 @@ import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-a
 export class HelperService {
 
   options : InAppBrowserOptions = {
-    location : 'no',//Or 'no'
+    location : 'yes',//Or 'no'
     hidden : 'no', //Or  'yes'
     clearcache : 'yes',
     clearsessioncache : 'yes',
@@ -28,7 +28,6 @@ export class HelperService {
 };
 
   constructor(private toast: ToastController,
-              private alert: AlertController,
               private iab: InAppBrowser ) { }
 
 

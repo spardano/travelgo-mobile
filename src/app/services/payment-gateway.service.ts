@@ -3,42 +3,66 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { catchError, tap } from 'rxjs/operators';
 import { HelperService } from './helper.service';
+import { Preferences } from '@capacitor/preferences';
+import { ACCESS_TOKEN_KEY } from './authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PaymentGatewayService {
 
-  url = environment.midtrans;
 
   constructor(private http: HttpClient,
               private helper: HelperService) { }
 
-  async requestTransaction(payment_data){
+  async requestTransaction(id_booking){
 
-    const username = environment.midtrans_server_key;
-
-    const token = btoa(`${username}:`);
+    const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
+    const token = res.value;
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'Authorization': `Basic ${token}`,
+        'Authorization': `${token}`,
       })
     };
 
-    const payload = {
-      transaction_details: {
-        order_id: payment_data.id,
-        gross_amount: payment_data.total_bayar,
-      }
+    const body = {
+      'id_booking' : id_booking
     }
 
-    return this.http.post(this.url, payload, httpOptions).pipe(
+    return this.http.post(`${environment.base_api}/pemesanan/request-payment`, body, httpOptions).pipe(
       tap(res=>{
         console.log(res);
-        if(!res['redirect_url']){
+        if(!res['status']){
           this.helper.showToast('Request Transaksi pembayaran gagal dilakukan', 'danger');
+        }
+      }),catchError(e=>{
+        throw Error(e.message);
+      })
+    ).toPromise();
+  }
+
+  async checkPaymentStatus(id_booking){
+    const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
+    const token = res.value;
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`,
+      })
+    };
+
+    const body = {
+      'id_booking' : id_booking
+    }
+
+    return this.http.post(`${environment.base_api}/pemesanan/check-payment`, body, httpOptions).pipe(
+      tap(res=>{
+        console.log(res);
+        if(!res['status']){
+          this.helper.showToast('Gagal memeriksa status pembayaran', 'danger');
         }
       }),catchError(e=>{
         throw Error(e.message);

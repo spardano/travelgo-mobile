@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
+import { ModalController } from '@ionic/angular';
 import { from } from 'rxjs';
+import { ChooseLocationPage } from 'src/app/modal/choose-location/choose-location.page';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { HelperService } from 'src/app/services/helper.service';
 import { SeatService } from 'src/app/services/seat.service';
@@ -15,105 +17,16 @@ export class BookingSeatPage implements OnInit {
 
   public $jumlahPenumpang = 1;
   public seatLayout:any = {};
-  // public seatLayout = {
-  //   id:1,
-  //   id_angkutan:1,
-  //   jumlah_baris: 3,
-  //   jumlah_kolom: 3,
-
-  //   //data yang didapatkan dari api
-  //   detailBangku:[
-  //     {
-  //       id:1,
-  //       id_angkutan:1,
-  //       baris:1,
-  //       kolom:1,
-  //       kode_bangku: 'CC',
-  //       ketersediaan: 1,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:2,
-  //       id_angkutan:1,
-  //       baris:1,
-  //       kolom:2,
-  //       kode_bangku: 'KONSOL',
-  //       ketersediaan: 0,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:3,
-  //       id_angkutan:1,
-  //       baris:1,
-  //       kolom:3,
-  //       kode_bangku: 'SUPIR',
-  //       ketersediaan: 0,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:4,
-  //       id_angkutan:1,
-  //       baris:2,
-  //       kolom:1,
-  //       kode_bangku: 'A1',
-  //       ketersediaan: 1,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:5,
-  //       id_angkutan:1,
-  //       baris:2,
-  //       kolom:2,
-  //       kode_bangku: 'A2',
-  //       ketersediaan: 1,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:6,
-  //       id_angkutan:1,
-  //       baris:2,
-  //       kolom:3,
-  //       kode_bangku: 'A3',
-  //       ketersediaan: 1,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:7,
-  //       id_angkutan:1,
-  //       baris:3,
-  //       kolom:1,
-  //       kode_bangku: 'B1',
-  //       ketersediaan: 1,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:8,
-  //       id_angkutan:1,
-  //       baris:3,
-  //       kolom:2,
-  //       kode_bangku: 'B2',
-  //       ketersediaan: 1,
-  //       harga_tiket: 200000
-  //     },
-  //     {
-  //       id:9,
-  //       id_angkutan:1,
-  //       baris:3,
-  //       kolom:3,
-  //       kode_bangku: 'B3',
-  //       ketersediaan: 0,
-  //       harga_tiket: 200000
-  //     }
-  //   ]
-  // }
-
   maxColumnLayout;
   selectedSeat: any = [];
+  area_jemput:any;
+  area_antar:any;
 
   constructor(private helper: HelperService,
               private seat: SeatService,
               private router: Router,
               private storage: DataStorageService,
+              private modalCtrl: ModalController,
               private r: ActivatedRoute) { }
 
   ngOnInit() {
@@ -184,7 +97,14 @@ export class BookingSeatPage implements OnInit {
   }
 
   simpanDataOrder(){
-    let data_order = JSON.stringify(this.selectedSeat);
+    
+    let body = {
+      'selected_seat' : this.selectedSeat,
+      'area_jemput' : this.area_jemput,
+      'area_antar' : this.area_antar
+    }
+
+    let data_order = JSON.stringify(body);
     this.storage.setData('data-booking', data_order);
     return true;
   }
@@ -197,10 +117,40 @@ export class BookingSeatPage implements OnInit {
     }
 
     //cek apakah lokasi penjemputan sudah di setting
-
+    // if(!this.area_antar){
+    //   this.helper.showToast("Pilih lokasi pengantaran terlebih dahulu", "danger")
+    // }
     //cek apakah lokasi pengantaran sudah di setting
+    // if(!this.area_jemput){
+    //   this.helper.showToast("Pilih lokasi penjemputan terlebih dahulu", "danger")
+    // }
 
     return true;
   }
 
+  async openModalMap(type){
+    var id_jadwal = this.r.snapshot.params['id_jadwal'];
+    const modal = await this.modalCtrl.create({
+      component: ChooseLocationPage,
+      componentProps: {
+        type: type,
+        id_jadwal: id_jadwal
+      }
+    })
+
+    modal.present();
+    modal.onDidDismiss().then((data) => {
+      if(data.data){
+        if(data.data.type == 'penjemputan'){
+          this.area_jemput = data.data.area;
+          console.log(this.area_jemput);
+          
+        }else{
+          this.area_antar = data.data.area;
+          console.log(this.area_jemput);
+          
+        }
+      }
+    });
+  }
 }

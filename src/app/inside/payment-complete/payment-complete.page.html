@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Pembayaran Sudah diterima</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+<div class="lottie-container container">
+  <ng-lottie
+    width="100%"
+    containerClass="moving-box"
+    [options]="options">
+  </ng-lottie>
+</div>
+
+<div class="desc container text-center">
+  <h3>Terimakasi, </h3>
+  <p>Pembayaran kamu sudah kami terima, semoga perjalanannya menyenangkan ya!</p>
+</div>
+
+<div class="container check-payment mt-4">
+  <ion-button (click)="directToHome()" expand="block" fill="outline" color="tertiary" shape="round">
+    Kembali Ke Halaman Utama
+  </ion-button>
+</div>
+
+</ion-content>

@@ -4,6 +4,8 @@ import { AlertController } from '@ionic/angular';
 import { DataStorageService } from 'src/app/services/data-storage.service';
 import { from } from 'rxjs';
 import { PemesananService } from 'src/app/services/pemesanan.service';
+import { Preferences } from '@capacitor/preferences';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-payment-detail',
@@ -13,8 +15,11 @@ import { PemesananService } from 'src/app/services/pemesanan.service';
 export class PaymentDetailPage implements OnInit {
 
   data_booking:any = [];
+  area_jemput:any={};
+  area_antar:any={};
   totalTicket = 0;
   feeTambahan = 0;
+  tk_biaya;
   ppn = 0;
   biayaAdmin = 6500;
   totalTagihan = 0;
@@ -24,7 +29,8 @@ export class PaymentDetailPage implements OnInit {
   constructor(private alert: AlertController,
               private router: Router,
               private storage: DataStorageService,
-              private pemesanan: PemesananService) { }
+              private pemesanan: PemesananService,
+              private helper: HelperService) { }
 
   ngOnInit() {
     this.getDataBooking();
@@ -32,7 +38,14 @@ export class PaymentDetailPage implements OnInit {
 
   getDataBooking(){
     this.storage.getData('data-booking').then(res=>{
-      this.data_booking = JSON.parse(res);
+      let data = JSON.parse(res)
+      console.log(data);
+      
+      this.data_booking = data.selected_seat;
+      this.area_jemput = data.area_jemput ? data.area_jemput : null;
+      this.area_antar = data.area_antar ? data.area_antar : null;
+      // this.tk_biaya = this.data_booking.length * (parseFloat(this.area_antar.data.tk_biaya) + parseFloat(this.area_jemput.data.tk_biaya))
+      this.tk_biaya = 0;
       this.calculateTotalTicket();
       this.hitungTotal();
       // this.hitungPPN();
@@ -119,7 +132,7 @@ export class PaymentDetailPage implements OnInit {
   }
 
   hitungTotal(){
-    this.totalTagihan = this.totalTicket + this.feeTambahan + this.biayaAdmin;
+    this.totalTagihan = this.totalTicket + this.feeTambahan + this.biayaAdmin + this.tk_biaya;
   }
 
   refreshDataBooking(){
@@ -147,8 +160,13 @@ export class PaymentDetailPage implements OnInit {
          //setelah berhasil disimpan direct ke pembayaran
           if(this.paymentMethod == 'online'){
 
+            //hapus storeage detail-booking
+            Preferences.remove({key:'data-booking'});
+
             //direct ke payment gateway
-            this.router.navigate(['payment-gateway/2'], {replaceUrl: true});
+            // this.router.navigate(['payment-gateway/'+res['id_booking']], {replaceUrl: true});
+            const paymentUrl = 'https://af3d-114-10-84-188.ngrok-free.app/payment/'
+            this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number']);
 
           }else{
               //lansung ke page notifikasi pemberitahuan berhasil membeli tiket

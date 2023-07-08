@@ -70,10 +70,10 @@
         <section id="penjemputan">
             <label>Lokasi Penjemputan</label>
 
-            <ion-item id="open-modal" lines="none">
+            <ion-item id="open-modal" lines="none" (click)="openModalMap('penjemputan')">
                 <ion-label>
                     <p class="location">Pilih lokasi Penjemputan</p>
-                    <p class="region">Belum ada lokasi dipilih</p>
+                    <p class="region" *ngIf="area_jemput">{{area_jemput.data.kab_kota}}</p>
                 </ion-label>
 
                 <ion-icon slot="end" name="map-outline"></ion-icon>
@@ -83,10 +83,10 @@
 
         <section id="pengantaran">
             <label>Lokasi Pengantaran</label>
-            <ion-item lines="none">
+            <ion-item lines="none" (click)="openModalMap('pengantaran')">
                 <ion-label>
-                    <p class="location">Pilih lokasi Penjemputan</p>
-                    <p class="region">Belum ada lokasi dipilih</p>
+                    <p class="location">Pilih lokasi pengantaran</p>
+                    <p class="region" *ngIf="area_antar">{{area_antar.data.kab_kota}}</p>
                 </ion-label>
                 <ion-icon slot="end" name="map-outline"></ion-icon>
             </ion-item>

@@ -1,4 +1,4 @@
-ion-button{
+.locateMe{
     position: absolute;
     z-index: 999;
     top: 80px;
@@ -6,7 +6,6 @@ ion-button{
     --background: white;
     border-radius: 100%;
     color: var(--header-text-color);
-
 }
 
 .location-desc{
@@ -17,5 +16,8 @@ ion-button{
     ion-card{
         width: 100%;
         margin: 0 auto;
+    }
+    ion-button{
+        width: 100%;
     }
 }

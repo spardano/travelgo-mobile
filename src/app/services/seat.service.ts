@@ -32,7 +32,7 @@ export class SeatService {
 
     return this.http.post(`${environment.base_api}/pemesanan/get-bangku`, body, httpOptions).pipe(
       tap(res=>{
-        if(!res['staus']){
+        if(!res['status']){
           this.helper.showToast(res['message'], 'danger');
         }
       }),

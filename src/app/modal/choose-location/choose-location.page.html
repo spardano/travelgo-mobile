@@ -7,15 +7,24 @@
 <ion-content [fullscreen]="true">
   <div id="map" style="height:100%"></div>
 
-  <ion-button (click)="locatePosition()" shape="round">
+  <ion-button class="locateMe" (click)="locatePosition()" shape="round">
     <ion-icon name="locate-outline"></ion-icon>
   </ion-button>
 
   <div class="location-desc container">
     <ion-card>
       <ion-card-content>
-        {{address}}
+        <ion-label *ngIf="isMobile && address">
+          <h5>{{address.subAdministrativeArea}}</h5>
+          <p>{{address.addressLines[0]}}</p>
+        </ion-label>
+        <ion-button (click)="confirmLocation()" expand="block" fill="solid" color="success" shape="round">
+          Komfirmasi Lokasi
+        </ion-button>
       </ion-card-content>
     </ion-card>
   </div>
+
+  
+
 </ion-content>

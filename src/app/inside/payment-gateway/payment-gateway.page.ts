@@ -1,12 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { delay, from } from 'rxjs';
 import { HelperService } from 'src/app/services/helper.service';
 import { PaymentGatewayService } from 'src/app/services/payment-gateway.service';
 import { environment } from 'src/environments/environment';
 import { AnimationOptions } from 'ngx-lottie';
+import * as snap from '../../../assets/js/snap.js';
 
 @Component({
   selector: 'app-payment-gateway',
@@ -15,15 +16,13 @@ import { AnimationOptions } from 'ngx-lottie';
 })
 export class PaymentGatewayPage implements OnInit {
 
-  duePaymentData:any;
   externalLink:any;
   options: AnimationOptions;
-  
 
   constructor(private paymentService: PaymentGatewayService,
               private snap: ActivatedRoute,
-              private sanitize: DomSanitizer,
-              private helper: HelperService) { }
+              private helper: HelperService,
+              private router: Router) { }
 
   ngOnInit() {
     var lottieJSON = 'assets/illustration/lottie/online-payment.json';
@@ -32,33 +31,43 @@ export class PaymentGatewayPage implements OnInit {
     };
     delay(300);
     this.getduePayment();
+
   }
 
   getduePayment(){
     
-    const id_order = this.snap.snapshot.paramMap.get('id');
-    this.duePaymentData = {
-      id: id_order,
-      total_bayar: 260000,
-    }
+    const id_booking = this.snap.snapshot.paramMap.get('id');
 
-    this.getRedirectSnapMidtrans();
+    this.getRedirectSnapMidtrans(id_booking);
     
   }
 
-  getRedirectSnapMidtrans(){
-    from(this.paymentService.requestTransaction(this.duePaymentData)).subscribe(res=>{
-      // this.transformUrl(res['redirect_url'])
-      this.helper.openWithCordovaBrowser(res['redirect_url']);
+  getRedirectSnapMidtrans(id_booking){
+    from(this.paymentService.requestTransaction(id_booking)).subscribe(res=>{
+      if(res['status']){
+        const paymentUrl = res['paymentUrl']
+        this.helper.openWithCordovaBrowser(paymentUrl);
+      }      
     })
   }
 
-  transformUrl(link){
-    this.externalLink = this.sanitize.bypassSecurityTrustResourceUrl(link);
-  }
 
   resendMidtransRequest(){
     this.getduePayment();
+  }
+
+  checkPaymentStatus(){
+    const id_booking = this.snap.snapshot.paramMap.get('id');
+    from(this.paymentService.checkPaymentStatus(id_booking)).subscribe(res => {
+      if(res['status']){
+        const data = res['data'];
+        if(data.transaction_status === 'settlement'){
+          this.router.navigate(['payment-complete'], {replaceUrl:true});
+        }else{
+          this.helper.showToast('Kami belum menerima pembayaran', 'danger');
+        }
+      }
+    })
   }
 
 }

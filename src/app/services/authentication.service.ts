@@ -47,8 +47,15 @@ export class AuthenticationService {
     const body = {
       token: token
     }
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+       'Content-Type': 'application/json',
+       'ngrok-skip-browser-warning': 'true',
+      })
+    }
 
-    await this.http.post(`${this.url}/guest/checktoken`, body).pipe(
+    await this.http.post(`${this.url}/guest/checktoken`, body, httpOptions).pipe(
       tap(res=>{
 
         if(res['isExpired']){
