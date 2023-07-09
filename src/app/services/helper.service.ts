@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AlertController, ToastController } from '@ionic/angular';
+import { ToastController } from '@ionic/angular';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 
 @Injectable({
@@ -44,6 +44,8 @@ export class HelperService {
   public openWithCordovaBrowser(url : string){
     let target = "_self";
     this.iab.create(url,target,this.options);
+
+    // this.iab.addEventListener('loadstop', loadStopCallBack);
   }
 
   public openWithSystemBrowser(url : string){
