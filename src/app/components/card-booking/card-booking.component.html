@@ -1,34 +1,49 @@
 <ion-item lines="none">
+    <ion-thumbnail slot="end">
+        <ion-button class="bg-trash" *ngIf="data_booking.status == 1" expand="block" fill="solid">
+            <ion-icon name="cash-outline"></ion-icon>
+        </ion-button>
+
+        <ion-button id="trash" btn *ngIf="data_booking.status == 2 || data_booking.status ==1" expand="block" fill="solid">
+            <ion-icon name="trash-bin-outline"></ion-icon>
+        </ion-button>
+    </ion-thumbnail>
     <ion-label>
         <label>{{data_booking.nama_trayek}}</label>
         <ion-grid>
             <ion-row>
-                <ion-col size="3">
+                <ion-col size="5">
                     <div>
                         <p>Tanggal Booking</p>
                         <p>Jumlah Tiket </p>
                         <p>Harga Tiket </p>
+                        <p>Admin</p>
                     </div>
                 </ion-col>
-                <ion-col size="3">
+                <ion-col size="1">
                     <div>
                         <p>:</p>
                         <p>:</p>
+                        <p>:</p>
+                        <p>:</p>
                     </div>
                 </ion-col>
-                <ion-col size="3">
+                <ion-col size="5">
                     <div>
                         <p>{{data_booking.waktu_booking}}</p>
                         <p>{{data_booking.jml_tiket}}</p>
                         <p>{{data_booking.harga_tiket}}</p>
+                        <p>6500</p>
                     </div>
                 </ion-col>
+                <ion-col size="2">
+
+                </ion-col>
             </ion-row>
+
         </ion-grid>
 
         <small>Total Bayar : {{ data_booking.total_biaya }}</small>
 
-
-        <ion-button expand="block" fill="solid">Bayar Sekarang</ion-button>
     </ion-label>
 </ion-item>

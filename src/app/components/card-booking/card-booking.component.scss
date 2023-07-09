@@ -5,6 +5,21 @@ ion-item {
     margin-bottom: 20px;
 }
 
+ion-thumbnail {
+    width: 70px;
+    height: 60px;
+}
+
+#trash {
+    --background: red;
+}
+
+ion-button {
+    ion-icon {
+        color: aliceblue;
+    }
+}
+
 ion-label {
     label {
         font-family: 'Poppins';
