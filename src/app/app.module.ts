@@ -13,6 +13,7 @@ import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { NativeGeocoder, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
+
 export function playerFactory(){
   return player
 }

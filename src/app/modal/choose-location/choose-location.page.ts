@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Map,tileLayer,marker} from 'leaflet';
+import * as L from 'leaflet';
+import Geocoder from 'leaflet-control-geocoder';
 import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 import { ModalController, Platform } from '@ionic/angular';
-import { from } from 'rxjs';
+import { delay, from } from 'rxjs';
 import { PemesananService } from 'src/app/services/pemesanan.service';
 import { HelperService } from 'src/app/services/helper.service';
+import { Geolocation } from '@capacitor/geolocation';
 
 @Component({
   selector: 'app-choose-location',
@@ -17,12 +19,19 @@ export class ChooseLocationPage implements OnInit {
   id_jadwal:any;
   //variable
   title;
-  map:Map;
+  map:L.Map;
   newMarker:any;
   address:any;
   lat:any;
   lng:any;
   isMobile = false;
+  markerIcon = L.icon(
+    {
+      iconUrl:'assets/images/pin.svg',
+      iconSize: [32, 32],
+      shadowUrl: null
+    }
+  );
 
   constructor(private nativeGeocoder: NativeGeocoder,
               private plt: Platform,
@@ -31,22 +40,20 @@ export class ChooseLocationPage implements OnInit {
               private helper: HelperService) { }
 
   ngOnInit() {
-    this.checkTypeTitle();
-    if(this.plt.is("capacitor")){
-      this.isMobile = true;
-    }
+
+
   }
 
   // The below function is added
   ionViewDidEnter(){
-    this.loadMap();
-    this.locatePosition();
-  }
+    this.helper.simpleLoader();
+    this.checkTypeTitle();
+    if(this.plt.is("capacitor")){
+      this.isMobile = true;
+    }
 
-  loadMap(){
-    this.map = new Map("map").setView([-0.30581329101178656,100.36843299865724], 20);
-    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-    { attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(this.map);;
+    this.getCurrentPosition();
+
   }
 
   checkTypeTitle(){
@@ -57,37 +64,117 @@ export class ChooseLocationPage implements OnInit {
     }
   }
 
+
+  async getCurrentPosition ()  {
+    const coordinates = await Geolocation.getCurrentPosition();
+    
+    this.loadMap(coordinates.coords.latitude, coordinates.coords.longitude)
+  };
+
+  loadMap(latitude, longitude){
+
+    this.map = new L.Map("map").setView([latitude, longitude], 18);
+
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+    { attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(this.map);
+
+    var map = this.map;
+    var marker = this.newMarker;
+    var markerIcon = this.markerIcon;
+
+    const GeocoderControl = new Geocoder({
+      defaultMarkGeocode: false,
+      placeholder: "Temukan lokasi",
+      // position:'center'
+    }).on('markgeocode', function(e) {
+      map.panTo(e.geocode.center);
+      console.log(e.geocode.center);
+
+      if(marker){
+        map.removeLayer(marker);
+      }
+      
+      marker = L.marker([e.geocode.center.lat,e.geocode.center.lng], {draggable: true, icon: markerIcon});
+
+      //add marker to map
+      marker.addTo(map);
+
+      marker.bindPopup("Lokasi Pencarian").openPopup();
+
+      marker.on("dragend", ()=> {
+        const {lat , lng} = marker.getLatLng();
+        console.log(lat +', '+lng);
+      }).on('locationerror', function(e){
+        console.log(e);
+        alert("Location access denied.");
+      });
+
+    });
+
+    GeocoderControl.addTo(this.map);
+
+    setTimeout(() => {
+      this.map.invalidateSize();
+    }, 0);
+    
+    this.newMarker = L.marker([latitude,longitude], {draggable: true, icon: this.markerIcon});
+
+    //add marker to map
+    this.newMarker.addTo(this.map);
+      
+    //add pop up
+    this.newMarker.bindPopup("Lokasi kamu sekarang!").openPopup();
+
+    this.helper.dismissLoader();
+
+  }
+
   locatePosition(){
-    
-    console.log('locate position');
-    
+   
+
     this.map.locate({setView:true}).on("locationfound", (e: any)=> {
 
-      this.newMarker = marker([e.latitude,e.longitude], {draggable: 
-        true})
-
-      this.newMarker.addTo(this.map);
-
-      this.newMarker.bindPopup("Lokasi kamu sekarang!").openPopup();
-     
-      if(this.plt.is("capacitor")){
-        this.getAddress(e.latitude, e.longitude); // This line is added
+      if(this.newMarker){
+        this.map.removeLayer(this.newMarker);
       }
-      this.lat = e.latitude;
-      this.lng = e.longitude;
-   
+
+      this.newMarker = L.marker([e.latitude,e.longitude], {draggable: 
+        true, icon: this.markerIcon})
+      
+      //add marker to map
+      this.newMarker.addTo(this.map);
+      
+      //add pop up
+      this.newMarker.bindPopup("Lokasi kamu sekarang!").openPopup();
+
       this.newMarker.on("dragend", ()=> {
         const {lat , lng} = this.newMarker.getLatLng();
-        if(this.plt.is('android')){
+        if(this.plt.is('capacitor')){
           this.getAddress(lat, lng);
         }
         this.lat = lat;
         this.lng = lng;
         console.log(this.lat +', '+this.lng);
+      }).on('locationerror', function(e){
+        console.log(e);
+        alert("Location access denied.");
       });
 
     });
+
+   
+    
   }
+
+
+
+
+        // this.lat = e.latitude;
+      // this.lng = e.longitude;
+      // if(this.plt.is("capacitor")){
+      //   this.getAddress(e.latitude, e.longitude); // This line is added
+      // }
 
   //The function below is added
   getAddress(lat: number, long: number) {
@@ -121,5 +208,9 @@ export class ChooseLocationPage implements OnInit {
     })
   }
 
+
+  ngOnDestroy(){
+    this.helper.dismissLoader();
+  }
 
 }

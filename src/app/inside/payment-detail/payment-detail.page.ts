@@ -167,7 +167,7 @@ export class PaymentDetailPage implements OnInit {
             //direct ke payment gateway
             // this.router.navigate(['payment-gateway/'+res['id_booking']], {replaceUrl: true});
             const paymentUrl = `${environment.base_url}/payment/`
-            this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number']);
+            this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number'], true);
 
           }else{
               //lansung ke page notifikasi pemberitahuan berhasil membeli tiket

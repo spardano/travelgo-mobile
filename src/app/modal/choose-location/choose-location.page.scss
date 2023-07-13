@@ -1,11 +1,15 @@
 .locateMe{
     position: absolute;
     z-index: 999;
-    top: 80px;
-    right: 20px;
+    top: 145px;
+    left: 10px;
     --background: white;
-    border-radius: 100%;
+    --border-radius: 5px;
     color: var(--header-text-color);
+    font-size: 10px;
+    font-weight: bold;
+    width: 30px;
+    height: 30px;
 }
 
 .location-desc{
