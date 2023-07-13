@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { DetailJadwalDrawerPage } from 'src/app/modal/detail-jadwal-drawer/detail-jadwal-drawer.page';
 
 @Component({
@@ -23,7 +25,7 @@ export class CardTicketComponent  implements OnInit {
       componentProps: {
         data_jadwal: data
       },
-      cssClass: 'detail-jadwal-drawer'
+      cssClass: 'detail-booking-drawer'
     })
 
     modal.present();

@@ -4,7 +4,9 @@
     </ion-thumbnail>
     <ion-label>
         <label>{{data_tiket.nama_trayek}}</label>
-        <p>{{data_tiket.nama_angkutan}} <br> {{data_tiket.nama_kelas}} </p>
+        <p>{{data_tiket.nama_angkutan}} : {{data_tiket.nama_kelas}} </p>
+        <p>Jadwal : {{data_tiket.tanggal_berangkat | date}}</p>
+        <p>Jam : {{data_tiket.waktu_berangkat}}</p>
         <small>Rp. {{data_tiket.harga}}</small>
     </ion-label>
     <ion-icon (click)="openDetailJadwal(data_tiket)" slot="end" name="arrow-forward-outline"></ion-icon>
