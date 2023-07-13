@@ -47,9 +47,18 @@ const routes: Routes = [
   {
     path: 'choose-location',
     loadChildren: () => import('./modal/choose-location/choose-location.module').then( m => m.ChooseLocationPageModule)
-  },  {
+  },
+  {
     path: 'payment-complete',
     loadChildren: () => import('./inside/payment-complete/payment-complete.module').then( m => m.PaymentCompletePageModule)
+  },
+  {
+    path: 'detail-booking-drawer',
+    loadChildren: () => import('./modal/detail-booking-drawer/detail-booking-drawer.module').then( m => m.DetailBookingDrawerPageModule)
+  },
+  {
+    path: 'form-refund/:id',
+    loadChildren: () => import('./inside/form-refund/form-refund.module').then( m => m.FormRefundPageModule)
   },
 
 

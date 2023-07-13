@@ -1,0 +1,99 @@
+* {
+    background: transparent;
+    --background: transparent;
+}
+
+ion-content {
+    --background: var(--body-color)
+}
+
+.container {
+    background: transparent;
+}
+
+.header {
+    padding-inline: 10px;
+    padding-top: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.logo {
+    font-family: 'Poppins';
+    font-weight: bold;
+    letter-spacing: 0.115em;
+    color: #6D6D6D;
+}
+
+.header-hero {
+    width: 100%;
+    padding-inline: 13px;
+    background: linear-gradient(260.89deg, #E2A56C -20.21%, #3DC432 96.59%);
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    min-height: 170px;
+    border-radius: 0px 0px 30px 30px;
+    .img-bg {
+        position: absolute;
+        top: 20px;
+        right: -20px;
+        width: 60%;
+    }
+    .profile {
+        color: white;
+        font-family: 'Raleway';
+        padding-bottom: 30px;
+        margin-top: 40px;
+        h3 {
+            line-height: 2px;
+        }
+        small {
+            line-height: 5px;
+        }
+    }
+}
+
+.card-search {
+    background-color: white;
+    min-height: 200px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-top: 13px;
+    margin-bottom: 20px;
+    align-items: center;
+    .bor {
+        position: relative;
+        border-radius: 10px;
+        border: groove;
+        border-color: red;
+        margin-left: 10px;
+        margin-right: 10px;
+        h5 {
+            margin-left: 10px;
+            color: red;
+        }
+        small {
+            margin-left: 15px;
+        }
+    }
+    ion-input {
+        margin-top: 13px;
+        width: 100%;
+    }
+}
+
+.button-cari {
+    padding: 20px;
+    .btn-prm {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 4px 0px 40px 20px rgba(123, 182, 23, 0.23);
+        width: 100%;
+        border-radius: 10px;
+        height: 35px;
+        text-align: center;
+    }
+}

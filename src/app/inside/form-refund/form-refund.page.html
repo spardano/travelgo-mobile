@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-label>
+            <app-logo></app-logo>
+            <ion-title>Form Refund</ion-title>
+        </ion-label>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+    <div class="header-hero">
+        <img class="img-bg" src="../../../assets/images/car-op.png" alt="">
+        <div class="profile">
+            <h3></h3>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card-search">
+            <form [formGroup]="FormDataRefund" (ngSubmit)="storRefund()">
+                <ion-list>
+                    <ion-item>
+                        <ion-select label="Bank" formControlName="bank" (ionChange)="onBankSelect($event)">
+                            <ion-select-option *ngFor="let item of bank" [value]="item.name">{{ item.name }}</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" formControlName="rekening" label="No.Rek" labelPlacement="stacked" placeholder="Rekening Bank" [clearInput]="true" [value]="selectedBankCode"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" formControlName="atas_nama" label="Nama" labelPlacement="stacked" [clearInput]="true" placeholder="Atas Nama"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" formControlName="no_transaksi" label="No.Transaksi" labelPlacement="stacked" [clearInput]="true" placeholder="Nomor Transaksi"></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-input type="text" formControlName="alasan" label="Alasan" labelPlacement="stacked" [clearInput]="true" placeholder="Alasan Refund"></ion-input>
+                    </ion-item>
+                    <div class="button-cari">
+                        <button type="submit" class="btn btn-prm ">Batalkan Tiket</button>
+                    </div>
+
+                </ion-list>
+            </form>
+        </div>
+        <div class="card-search">
+            <div class="bor">
+                <h5>Syarat dan ketentuan...!!!</h5>
+                <small>1. Pembatalan satu hari sebelum keberangkatan.</small><br>
+                <small>2. Pengembalian dana di potongan 25%.</small><br>
+                <small>3. Pengembalian dana paling lambat 14 hari kerja.</small><br>
+                <small>4. Pembatalan tiket hari keberangkatan dana tidak</small><br>
+                <small style="padding-left: 15px;">kembali.</small><br>
+                <small></small>
+            </div>
+        </div>
+    </div>
+</ion-content>

@@ -22,7 +22,6 @@ export class OrderPage implements OnInit {
       if(res['status']){
         this.data_booking = res['data'];
         console.log(this.data_booking);
-        
       }
     })
   }
