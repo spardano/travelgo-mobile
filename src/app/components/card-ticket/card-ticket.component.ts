@@ -1,7 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { Pipe, PipeTransform } from '@angular/core';
-import { DatePipe } from '@angular/common';
 import { DetailJadwalDrawerPage } from 'src/app/modal/detail-jadwal-drawer/detail-jadwal-drawer.page';
 
 @Component({

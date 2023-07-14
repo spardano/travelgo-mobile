@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>akun</ion-title>
+        <div class="logout" slot="end" (click)="logout()">
+            <label>log-out</label>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">akun</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <div class="profile-container">
+        <div class="profile-header">
+            <ion-avatar>
+                <img src="../../../assets/images/Profile.jpeg" alt="Profile Picture">
+            </ion-avatar>
+            <h2>{{ user.name }}</h2>
+            <p>{{ user.email }}</p>
+        </div>
+        <div class="profile-details">
+            <ion-item>
+                <ion-badge>
+                    <p>ohndoe@example.com</p>
+                </ion-badge>
+            </ion-item>
+            <ion-item>
+                <ion-input type="tel" class="form-control" id="phone-input" [readonly]="isReadOnly" [(ngModel)]="phone_number"></ion-input>
+                <button id="edit-button" class="icon" (click)="toggleReadOnly()">
+                    <ion-icon name="create"></ion-icon>
+                  </button>
+            </ion-item>
+            <ion-button (click)="Editnumber()" expand="full" class="save-button">Simpan</ion-button>
+            <ion-button (click)="resetPassword()" expand="full" class="out-button">Reset Password</ion-button>
+        </div>
+    </div>
+</ion-content>
