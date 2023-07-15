@@ -1,20 +1,21 @@
 <ion-item lines="none">
-    <ion-thumbnail slot="end">
-        <ion-button class="bg-trash" *ngIf="data_booking.status == 1" expand="block" fill="solid">
-            <ion-icon name="cash-outline"></ion-icon>
-        </ion-button>
-
-        <ion-button id="trash" btn *ngIf="data_booking.status == 2 || data_booking.status ==1" expand="block" fill="solid">
-            <ion-icon name="trash-bin-outline"></ion-icon>
-        </ion-button>
-    </ion-thumbnail>
     <ion-label>
-        <label>{{data_booking.nama_trayek}}</label>
         <ion-grid>
             <ion-row>
-                <ion-col size="5">
+                <ion-col size="8"><label>{{data_booking.nama_trayek}}</label><br></ion-col>
+                <ion-col size="3">
+                    <ion-badge color="warning" *ngIf="data_booking.status == 1">Booking</ion-badge>
+                    <ion-badge color="success" *ngIf="data_booking.status == 2">Konfirm</ion-badge>
+                    <ion-badge color="medium" *ngIf="data_booking.status == 3">Expired</ion-badge>
+                    <ion-badge color="danger" *ngIf="data_booking.status == 4">Cencel</ion-badge>
+                    <ion-badge color="success" *ngIf="data_booking.status == 5">Redund</ion-badge>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="6">
                     <div>
-                        <p>Tanggal Booking</p>
+                        <p>Tanggal Berangkat</p>
+                        <p>Waktu Berangkat</p>
                         <p>Jumlah Tiket </p>
                         <p>Harga Tiket </p>
                         <p>Admin</p>
@@ -26,24 +27,40 @@
                         <p>:</p>
                         <p>:</p>
                         <p>:</p>
+                        <p>:</p>
                     </div>
                 </ion-col>
-                <ion-col size="5">
+                <ion-col size="3">
                     <div>
-                        <p>{{data_booking.waktu_booking}}</p>
+                        <p>{{data_booking.tanggal_berangkat | date}}</p>
+                        <p>{{data_booking.waktu_berangkat}}</p>
                         <p>{{data_booking.jml_tiket}}</p>
-                        <p>{{data_booking.harga_tiket}}</p>
-                        <p>6500</p>
+                        <p>Rp.{{data_booking.harga_tiket | number}}</p>
+                        <p>Rp.6.500</p>
                     </div>
-                </ion-col>
-                <ion-col size="2">
-
                 </ion-col>
             </ion-row>
+            <ion-row>
+                <ion-col size="5">
+                    <div style="border-top: 1px solid var(--gray-text-color);">
+                        <small>Total: Rp.{{ data_booking.total_biaya | number }}</small>
+                    </div>
+                </ion-col>
+                <ion-col size="3">
+                    <ion-button (click)="openDetailBooking(data_booking)" id="trash2" *ngIf="data_booking.status == 1" expand="block" fill="solid">
+                        <small>Bayar</small>
+                    </ion-button>
+                </ion-col>
+                <ion-col>
+                    <ion-button (click)="cencelBooking(data_booking.id_booking)" id="trash" *ngIf="data_booking.status == 1" expand="block" fill="solid">
+                        <small>Cencel</small>
+                    </ion-button>
 
+                    <ion-button (click)="directToForm()" id="trash3" *ngIf="data_booking.status == 2" expand="block" fill="solid">
+                        <small>Refund</small>
+                    </ion-button>
+                </ion-col>
+            </ion-row>
         </ion-grid>
-
-        <small>Total Bayar : {{ data_booking.total_biaya }}</small>
-
     </ion-label>
 </ion-item>

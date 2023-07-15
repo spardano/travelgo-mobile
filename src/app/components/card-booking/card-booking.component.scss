@@ -6,36 +6,50 @@ ion-item {
 }
 
 ion-thumbnail {
-    width: 70px;
+    width: 90px;
     height: 60px;
+    padding-right: 5px;
 }
 
 #trash {
     --background: red;
 }
 
+#trash3 {
+    --background: grey;
+}
+
+#trash2 {
+    --background: green;
+}
+
+ion-badge {
+    width: 90px;
+    padding-bottom: 5px;
+}
+
 ion-button {
-    ion-icon {
-        color: aliceblue;
-    }
+    width: 70px;
 }
 
 ion-label {
     label {
-        font-family: 'Poppins';
+        font-family: 'Raleway';
         font-weight: bold;
         font-size: 12px;
+        color: var(--header-text-colo);
     }
     p {
-        font-family: 'Raleway';
+        font-family: 'Poppins';
+        font-weight: 'thin';
         font-size: 10px;
         line-height: 14px;
     }
     small {
-        font-family: 'Raleway';
-        font-weight: bold;
+        font-family: 'Poppins';
+        font-weight: 'thin';
         line-height: 14px;
-        color: var(--primary-color);
+        color: var(--header-text-colo);
     }
 }
 

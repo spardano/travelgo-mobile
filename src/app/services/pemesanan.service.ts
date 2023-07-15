@@ -25,7 +25,7 @@ export class PemesananService {
         'Content-Type': 'application/json',
         'Authorization': `${token}`,
       })
-    };
+    }
 
     const body = {
       'detail_booking': detail_booking,
@@ -42,7 +42,35 @@ export class PemesananService {
         throw new Error(e.message);
       })
     ).toPromise();
-  }    
+  } 
+  
+  async BookingCencel(id_booking){
+    const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
+    const token = res.value;
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`,
+      })
+    };
+
+    const body = { 
+      'id_booking' : id_booking
+    };
+
+    return this.http.post(`${environment.base_api}/pemesanan/cencel-booking`, body, httpOptions).pipe(
+      tap(res=>{
+        if(!res['status']){
+          this.helper.showToast(res['message'], 'danger');
+        }
+      }),
+      catchError(e =>{
+        throw new Error(e.message);
+      })
+    ).toPromise();
+
+  }
   
   async checkCoverLocation(lat, lng, id_jadwal, type){
     const res = await Preferences.get({key: ACCESS_TOKEN_KEY});

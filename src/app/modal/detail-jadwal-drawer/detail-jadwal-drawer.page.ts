@@ -27,5 +27,5 @@ export class DetailJadwalDrawerPage implements OnInit {
     this.modalCtrl.dismiss();
     this.router.navigate(['booking-seat/'+this.data_jadwal.id_jadwal]);
   }
-
+  
 }
