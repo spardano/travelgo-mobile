@@ -59,7 +59,11 @@ const routes: Routes = [
   {
     path: 'form-refund/:id',
     loadChildren: () => import('./inside/form-refund/form-refund.module').then( m => m.FormRefundPageModule)
+  },  {
+    path: 'akun',
+    loadChildren: () => import('./inside/akun/akun.module').then( m => m.AkunPageModule)
   },
+
 
 
 

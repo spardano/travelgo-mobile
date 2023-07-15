@@ -18,6 +18,11 @@ const routes: Routes = [
         path: 'order',
         loadChildren: () => import('../order/order.module').then( m => m.OrderPageModule),
         canLoad: [AuthenticationGuard]
+      },
+      {
+        path: 'akun',
+        loadChildren: () => import('../akun/akun.module').then( m => m.AkunPageModule),
+        canLoad: [AuthenticationGuard]
       }
     ]
   },
