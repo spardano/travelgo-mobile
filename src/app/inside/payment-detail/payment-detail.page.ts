@@ -45,11 +45,10 @@ export class PaymentDetailPage implements OnInit {
       this.data_booking = data.selected_seat;
       this.area_jemput = data.area_jemput ? data.area_jemput : null;
       this.area_antar = data.area_antar ? data.area_antar : null;
-      // this.tk_biaya = this.data_booking.length * (parseFloat(this.area_antar.data.tk_biaya) + parseFloat(this.area_jemput.data.tk_biaya))
-      this.tk_biaya = 0;
+      this.tk_biaya = this.data_booking.length * (parseFloat(this.area_antar.data.tk_biaya) + parseFloat(this.area_jemput.data.tk_biaya))
+      // this.tk_biaya = 0;
       this.calculateTotalTicket();
       this.hitungTotal();
-      // this.hitungPPN();
     })
   }
 
@@ -165,7 +164,6 @@ export class PaymentDetailPage implements OnInit {
             Preferences.remove({key:'data-booking'});
 
             //direct ke payment gateway
-            // this.router.navigate(['payment-gateway/'+res['id_booking']], {replaceUrl: true});
             const paymentUrl = `${environment.base_url}/payment/`
             this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number'], true);
 

@@ -41,7 +41,6 @@ export class ChooseLocationPage implements OnInit {
 
   ngOnInit() {
 
-
   }
 
   // The below function is added
@@ -79,37 +78,15 @@ export class ChooseLocationPage implements OnInit {
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
     { attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>'}).addTo(this.map);
 
-    var map = this.map;
-    var marker = this.newMarker;
-    var markerIcon = this.markerIcon;
-
     const GeocoderControl = new Geocoder({
       defaultMarkGeocode: false,
       placeholder: "Temukan lokasi",
-      // position:'center'
-    }).on('markgeocode', function(e) {
-      map.panTo(e.geocode.center);
+    }).on('markgeocode', (e) => {
+      this.map.panTo(e.geocode.center);
       console.log(e.geocode.center);
 
-      if(marker){
-        map.removeLayer(marker);
-      }
+      this.addMarker(e.geocode.center.lat, e.geocode.center.lng)
       
-      marker = L.marker([e.geocode.center.lat,e.geocode.center.lng], {draggable: true, icon: markerIcon});
-
-      //add marker to map
-      marker.addTo(map);
-
-      marker.bindPopup("Lokasi Pencarian").openPopup();
-
-      marker.on("dragend", ()=> {
-        const {lat , lng} = marker.getLatLng();
-        console.log(lat +', '+lng);
-      }).on('locationerror', function(e){
-        console.log(e);
-        alert("Location access denied.");
-      });
-
     });
 
     GeocoderControl.addTo(this.map);
@@ -118,63 +95,62 @@ export class ChooseLocationPage implements OnInit {
       this.map.invalidateSize();
     }, 0);
     
-    this.newMarker = L.marker([latitude,longitude], {draggable: true, icon: this.markerIcon});
-
-    //add marker to map
-    this.newMarker.addTo(this.map);
-      
-    //add pop up
-    this.newMarker.bindPopup("Lokasi kamu sekarang!").openPopup();
+    
+    this.addMarker(latitude, longitude);
 
     this.helper.dismissLoader();
 
   }
 
-  locatePosition(){
-   
+  addMarker(lat, lng){
 
-    this.map.locate({setView:true}).on("locationfound", (e: any)=> {
+    this.lat = lat;
+    this.lng = lng;
+    console.log([lat, lng]);
+    
+    
+    //get adress
+    if(this.plt.is("capacitor")){
+      this.getAddress(lat, lng);
+    }
 
-      if(this.newMarker){
-        this.map.removeLayer(this.newMarker);
-      }
+    if(this.newMarker){
+      this.map.removeLayer(this.newMarker);
+    }
+    
+    this.newMarker = L.marker([lat,lng], {draggable: true, icon: this.markerIcon});
 
-      this.newMarker = L.marker([e.latitude,e.longitude], {draggable: 
-        true, icon: this.markerIcon})
-      
-      //add marker to map
-      this.newMarker.addTo(this.map);
-      
-      //add pop up
-      this.newMarker.bindPopup("Lokasi kamu sekarang!").openPopup();
+    //add marker to map
+    this.newMarker.addTo(this.map);
 
-      this.newMarker.on("dragend", ()=> {
-        const {lat , lng} = this.newMarker.getLatLng();
-        if(this.plt.is('capacitor')){
-          this.getAddress(lat, lng);
-        }
-        this.lat = lat;
-        this.lng = lng;
-        console.log(this.lat +', '+this.lng);
-      }).on('locationerror', function(e){
-        console.log(e);
-        alert("Location access denied.");
-      });
+    this.newMarker.bindPopup("Lokasi Pencarian").openPopup();
 
+    this.newMarker.on("dragend", ()=> {
+      const {lat , lng} = this.newMarker.getLatLng();
+      this.lat = lat;
+      this.lng = lng;
+      console.log([this.lat ,this.lng]);
+      //get adress
+    if(this.plt.is("capacitor")){
+      this.getAddress(lat, lng);
+    }
+
+    }).on('locationerror', function(e){
+      console.log(e);
+      alert("Location access denied.");
     });
 
-   
-    
   }
 
+  locatePosition(){
+   
+    this.map.locate({setView:true}).on("locationfound", (e: any)=> {      
 
+      this.addMarker(e.latitude, e.longitude);
 
-
-        // this.lat = e.latitude;
-      // this.lng = e.longitude;
-      // if(this.plt.is("capacitor")){
-      //   this.getAddress(e.latitude, e.longitude); // This line is added
-      // }
+    });
+    
+  }
 
   //The function below is added
   getAddress(lat: number, long: number) {

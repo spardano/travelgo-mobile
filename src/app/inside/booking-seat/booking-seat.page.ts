@@ -117,13 +117,13 @@ export class BookingSeatPage implements OnInit {
     }
 
     //cek apakah lokasi penjemputan sudah di setting
-    // if(!this.area_antar){
-    //   this.helper.showToast("Pilih lokasi pengantaran terlebih dahulu", "danger")
-    // }
+    if(!this.area_antar){
+      this.helper.showToast("Pilih lokasi pengantaran terlebih dahulu", "danger")
+    }
     //cek apakah lokasi pengantaran sudah di setting
-    // if(!this.area_jemput){
-    //   this.helper.showToast("Pilih lokasi penjemputan terlebih dahulu", "danger")
-    // }
+    if(!this.area_jemput){
+      this.helper.showToast("Pilih lokasi penjemputan terlebih dahulu", "danger")
+    }
 
     return true;
   }
