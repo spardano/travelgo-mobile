@@ -218,5 +218,33 @@ export class AuthenticationService {
 
   }
 
+  async passBaru(lama, baru){
+    const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
+    const token = res.value;
+    
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `${token}`,
+      })
+    };
+
+    const body = {
+      'passlama': lama, 
+      'passbaru': baru
+    };
+
+    return this.http.post(`${environment.base_api}/user/update-pass`, body, httpOptions).pipe(
+      tap(res=>{
+        if(!res['status']){
+          this.help.showToast(res['message'], 'danger');
+        }
+      }),
+      catchError(e =>{
+        throw new Error(e.message);
+      })
+    ).toPromise();
+  }
+
 
 }

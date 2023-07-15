@@ -7,13 +7,15 @@ import { IonicModule } from '@ionic/angular';
 import { AkunPageRoutingModule } from './akun-routing.module';
 
 import { AkunPage } from './akun.page';
+import { SharedComponentsModule } from 'src/app/components/shared-components.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AkunPageRoutingModule
+    AkunPageRoutingModule,
+    SharedComponentsModule,
   ],
   declarations: [AkunPage]
 })

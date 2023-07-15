@@ -46,6 +46,7 @@
 
 .save-button {
     margin-top: 30px;
+    height: 40px;
 }
 
 .out-button {
@@ -66,7 +67,7 @@
     /* Optional: Set the background to transparent */
     border-radius: 0px 10px 10px 0px;
     height: 58px;
-    --background: blue;
+    background-color: rgb(2, 120, 224);
     ion-icon {
         padding-left: 5px;
     }
@@ -76,13 +77,13 @@
     margin-right: 5px;
 }
 
-.icon.active ion-icon {
-    --background: #e0e0e0;
+.icon.active {
+    background-color: rgb(10, 10, 11);
     /* Change the color of the icon when active */
 }
 
 ion-badge {
-    width: 300px;
+    width: 310px;
     height: 57px;
     align-items: center;
     align-content: center;
@@ -94,7 +95,7 @@ ion-badge {
     }
 }
 
-ion-input {
+.input1 {
     text-align: center;
     border-radius: 10px 0px 0px 10px;
     height: 58px;
@@ -105,4 +106,12 @@ ion-input {
     align-items: center;
     cursor: pointer;
     height: 58px;
+}
+
+ion-accordion-group {
+    margin-top: 15px;
+    .intro {
+        --background: #7cb61758;
+        border-radius: 10px;
+    }
 }
