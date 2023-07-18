@@ -27,6 +27,7 @@
                             <ion-icon name="locate-outline"></ion-icon>
                         </ion-label>
                         <ion-select label="Kota Keberangkatan" formControlName="s_area_keberangkatan">
+                            <ion-select-option value="">TIDAK ADA</ion-select-option>
                             <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.kabupaten_kota.nama_kab_kota }}</ion-select-option>
                         </ion-select>
                     </ion-item>
@@ -36,6 +37,7 @@
                             <ion-icon name="compass-outline"></ion-icon>
                         </ion-label>
                         <ion-select label="Kota Tujuan" formControlName="s_area_tujuan">
+                            <ion-select-option value="">TIDAK ADA</ion-select-option>
                             <ion-select-option *ngFor="let item of data_area" value="{{ item.id }}">{{ item.kabupaten_kota.nama_kab_kota }}</ion-select-option>
                         </ion-select>
                     </ion-item>
