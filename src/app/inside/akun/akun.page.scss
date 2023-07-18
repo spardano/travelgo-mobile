@@ -1,0 +1,117 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.profile-header ion-avatar {
+    width: 150px;
+    height: 150px;
+}
+
+.profile-header h2 {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.profile-header p {
+    font-size: 16px;
+    color: gray;
+}
+
+.profile-details ion-item {
+    --border-color: transparent;
+    --highlight-color-focused: transparent;
+    --highlight-color-invalid: transparent;
+    --highlight-color-valid: transparent;
+    margin-bottom: 10px;
+}
+
+.profile-details .item-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.profile-details ion-input {
+    border-bottom: 1px solid gray;
+}
+
+.save-button {
+    margin-top: 30px;
+    height: 40px;
+}
+
+.out-button {
+    margin-top: 10px;
+    --background: red;
+}
+
+.logout {
+    margin-right: 20px;
+}
+
+.icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* Add a 1px solid black border */
+    padding: 5px;
+    /* Optional: Set the background to transparent */
+    border-radius: 0px 10px 10px 0px;
+    height: 58px;
+    background-color: rgb(2, 120, 224);
+    ion-icon {
+        padding-left: 5px;
+    }
+}
+
+.icon ion-icon {
+    margin-right: 5px;
+}
+
+.icon.active {
+    background-color: rgb(10, 10, 11);
+    /* Change the color of the icon when active */
+}
+
+ion-badge {
+    width: 310px;
+    height: 57px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
+    border-radius: 10px;
+    p {
+        padding-top: 16px;
+        font-size: medium;
+    }
+}
+
+.input1 {
+    text-align: center;
+    border-radius: 10px 0px 0px 10px;
+    height: 58px;
+}
+
+.buttonedit {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    height: 58px;
+}
+
+ion-accordion-group {
+    margin-top: 15px;
+    .intro {
+        --background: #7cb61758;
+        border-radius: 10px;
+    }
+}
