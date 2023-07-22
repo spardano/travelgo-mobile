@@ -23,7 +23,7 @@ export class CardTicketComponent  implements OnInit {
       componentProps: {
         data_jadwal: data
       },
-      cssClass: 'detail-booking-drawer'
+      cssClass: 'detail-jadwal-drawer'
     })
 
     modal.present();

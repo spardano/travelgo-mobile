@@ -169,6 +169,7 @@ export class PaymentDetailPage implements OnInit {
 
           }else{
               //lansung ke page notifikasi pemberitahuan berhasil membeli tiket
+              this.router.navigate([`payment-gateway/${res['payment_number']}`], {replaceUrl:true});
           }
       }
     });

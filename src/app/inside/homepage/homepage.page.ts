@@ -43,7 +43,6 @@ export class HomepagePage implements OnInit {
       if(res['status']){
         this.data_jadwal = res['data'];
         console.log(this.data_jadwal);
-        
       }
     })
   }

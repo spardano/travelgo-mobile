@@ -43,7 +43,7 @@ export class PaymentGatewayService {
     ).toPromise();
   }
 
-  async checkPaymentStatus(id_booking){
+  async checkPaymentStatus(payment_number){
     const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
     const token = res.value;
 
@@ -55,7 +55,7 @@ export class PaymentGatewayService {
     };
 
     const body = {
-      'id_booking' : id_booking
+      'payment_number' : payment_number
     }
 
     return this.http.post(`${environment.base_api}/pemesanan/check-payment`, body, httpOptions).pipe(

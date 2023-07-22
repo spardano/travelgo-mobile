@@ -30,35 +30,18 @@ export class PaymentGatewayPage implements OnInit {
       path: lottieJSON
     };
     delay(300);
-    this.getduePayment();
-
   }
 
   getduePayment(){
-    
-    const id_booking = this.snap.snapshot.paramMap.get('id');
-
-    this.getRedirectSnapMidtrans(id_booking);
-    
+    const payment_number = this.snap.snapshot.paramMap.get('id');
+    const paymentUrl = `${environment.base_url}/payment/${payment_number}`
+    this.helper.openWithCordovaBrowser(paymentUrl);
   }
 
-  getRedirectSnapMidtrans(id_booking){
-    from(this.paymentService.requestTransaction(id_booking)).subscribe(res=>{
-      if(res['status']){
-        const paymentUrl = res['paymentUrl']
-        this.helper.openWithCordovaBrowser(paymentUrl);
-      }      
-    })
-  }
-
-
-  resendMidtransRequest(){
-    this.getduePayment();
-  }
 
   checkPaymentStatus(){
-    const id_booking = this.snap.snapshot.paramMap.get('id');
-    from(this.paymentService.checkPaymentStatus(id_booking)).subscribe(res => {
+    const payment_number = this.snap.snapshot.paramMap.get('id');
+    from(this.paymentService.checkPaymentStatus(payment_number)).subscribe(res => {
       if(res['status']){
         const data = res['data'];
         if(data.transaction_status === 'settlement'){
@@ -68,6 +51,10 @@ export class PaymentGatewayPage implements OnInit {
         }
       }
     })
+  }
+
+  closePage(){
+    this.router.navigate(['tabs/homepage'], {replaceUrl:true});
   }
 
 }

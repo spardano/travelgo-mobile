@@ -1,66 +1,67 @@
-<ion-item lines="none">
-    <ion-label>
-        <ion-grid>
-            <ion-row>
-                <ion-col size="8"><label>{{data_booking.nama_trayek}}</label><br></ion-col>
-                <ion-col size="3">
-                    <ion-badge color="warning" *ngIf="data_booking.status == 1">Booking</ion-badge>
-                    <ion-badge color="success" *ngIf="data_booking.status == 2">Konfirm</ion-badge>
-                    <ion-badge color="medium" *ngIf="data_booking.status == 3">Expired</ion-badge>
-                    <ion-badge color="danger" *ngIf="data_booking.status == 4">Cencel</ion-badge>
-                    <ion-badge color="success" *ngIf="data_booking.status == 5">Redund</ion-badge>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col size="6">
-                    <div>
-                        <p>Tanggal Berangkat</p>
-                        <p>Waktu Berangkat</p>
-                        <p>Jumlah Tiket </p>
-                        <p>Harga Tiket </p>
-                        <p>Admin</p>
-                    </div>
-                </ion-col>
-                <ion-col size="1">
-                    <div>
-                        <p>:</p>
-                        <p>:</p>
-                        <p>:</p>
-                        <p>:</p>
-                        <p>:</p>
-                    </div>
-                </ion-col>
-                <ion-col size="3">
-                    <div>
-                        <p>{{data_booking.tanggal_berangkat | date}}</p>
-                        <p>{{data_booking.waktu_berangkat}}</p>
-                        <p>{{data_booking.jml_tiket}}</p>
-                        <p>Rp.{{data_booking.harga_tiket | number}}</p>
-                        <p>Rp.6.500</p>
-                    </div>
-                </ion-col>
-            </ion-row>
-            <ion-row>
-                <ion-col size="5">
-                    <div style="border-top: 1px solid var(--gray-text-color);">
-                        <small>Total: Rp.{{ data_booking.total_biaya | number }}</small>
-                    </div>
-                </ion-col>
-                <ion-col size="3">
-                    <ion-button (click)="openDetailBooking(data_booking)" id="trash2" *ngIf="data_booking.status == 1" expand="block" fill="solid">
-                        <small>Bayar</small>
-                    </ion-button>
-                </ion-col>
-                <ion-col>
-                    <ion-button (click)="cencelBooking(data_booking.id_booking)" id="trash" *ngIf="data_booking.status == 1" expand="block" fill="solid">
-                        <small>Cencel</small>
-                    </ion-button>
 
-                    <ion-button (click)="directToForm()" id="trash3" *ngIf="data_booking.status == 2" expand="block" fill="solid">
-                        <small>Refund</small>
-                    </ion-button>
-                </ion-col>
-            </ion-row>
-        </ion-grid>
-    </ion-label>
-</ion-item>
+<ion-card>
+    <img alt="No thumbnail" src="{{data_booking.thumbnail}}" />
+    <ion-card-header>
+    <ion-card-subtitle>
+        <ion-badge color="warning" *ngIf="data_booking.status == 1">Booking</ion-badge>
+        <ion-badge color="success" *ngIf="data_booking.status == 2">Konfirm</ion-badge>
+        <ion-badge color="medium" *ngIf="data_booking.status == 3">Expired</ion-badge>
+        <ion-badge color="danger" *ngIf="data_booking.status == 4">Batal</ion-badge>
+        <ion-badge color="success" *ngIf="data_booking.status == 5">Redund</ion-badge>
+    </ion-card-subtitle>
+      <ion-card-title>{{data_booking.nama_trayek}}</ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+        <ion-row>
+            <ion-col size="6">
+                <div>
+                    <p>Tanggal Berangkat</p>
+                    <p>Waktu Berangkat</p>
+                    <p>Jumlah Tiket </p>
+                    <p>Harga Tiket </p>
+                    <p>Admin</p>
+                    <p>Total Biaya</p>
+                 
+                </div>
+            </ion-col>
+            <ion-col size="1">
+                <div>
+                    <p>:</p>
+                    <p>:</p>
+                    <p>:</p>
+                    <p>:</p>
+                    <p>:</p>
+                    <p>:</p>
+                </div>
+            </ion-col>
+            <ion-col>
+                <div>
+                    <p>{{data_booking.tanggal_berangkat | date}}</p>
+                    <p>{{data_booking.waktu_berangkat}}</p>
+                    <p>{{data_booking.jml_tiket}}</p>
+                    <p>Rp.{{data_booking.harga_tiket | number}}</p>
+                    <p>Rp.{{6500 | number}}</p>
+                    <p>Rp.{{ data_booking.total_biaya | number }}</p>
+                </div>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+    <div class="container" style="margin-bottom: 20px;">
+        <ion-row class="btn-actions">
+            <ion-col *ngIf="data_booking.status == 2">
+                <ion-button style="width: 100%;" (click)="directToForm()" id="trash3" expand="block" fill="solid">
+                    Refund
+                </ion-button>
+            </ion-col>
+            <ion-col *ngIf="data_booking.status == 1">
+                <ion-button style="width: 100%;" (click)="cencelBooking(data_booking.id_booking)" id="trash"  expand="block" fill="solid">
+                    Batal
+                </ion-button>
+            </ion-col>
+            <ion-col *ngIf="data_booking.status == 1">
+                <ion-button style="width: 100%;"  (click)="openPayment(data_booking.payment_number)" fill="solid" color="success" expand="full">Bayar</ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-card>

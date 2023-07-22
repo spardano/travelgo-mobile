@@ -56,3 +56,15 @@ ion-label {
 ion-icon {
     color: var(--primary-color);
 }
+
+.btn-actions{
+    --padding: 0;
+
+    ion-col{
+        --ion-grid-column-padding:0;
+    }
+
+    ion-button{
+        --border-radius:0;
+    }
+}

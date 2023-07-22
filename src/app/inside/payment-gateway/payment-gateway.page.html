@@ -1,6 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>Pembayaran</ion-title>
+    <ion-icon slot="end" name="close-circle-outline" (click)="closePage()"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -14,12 +15,12 @@
 </div>
 
 <div class="desc container text-center">
-  <h3>Kami tunggu Pembayarannya ya, </h3>
-  <p>Dialog pembayaran online melalui midtrans akan terbuka secara otomatis, kamu tinggal menyelesaikan pembayaran sebelum waktu habis</p>
+  <h3>Pembelian Tiket Berhasil</h3>
+  <p>Anda dapat membayar kapan saja sebelum melewati waktu kadaluarsa (untuk metode pembayaran online). Anda dapat mengabaikan dialog ini jika memilih metode pembayaran lansung</p>
 </div>
 
 <div class="container text-center notif">
-  <p>Dialog Midtrans tidak muncul ? <a style="text-transform: none; color: blue; font-weight: bold;" (click)="resendMidtransRequest()">Klik Disini</a> </p>
+  <p>Ingin Bayar Sekarang ? <a style="text-transform: none; color: blue; font-weight: bold;" (click)="getduePayment()">Klik Disini</a> </p>
 </div>
 
 <div class="container check-payment mt-4">

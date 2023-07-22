@@ -98,5 +98,9 @@ export class CardBookingComponent  implements OnInit {
     this.router.navigate(['form-refund/'+this.data_booking.id_booking]);
   }
 
+  openPayment(payment_number){
+    this.router.navigate([`payment-gateway/${payment_number}`]);
+  }
+
 
 }
