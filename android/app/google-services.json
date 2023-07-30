@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "316798190783",
+    "project_id": "travelgo-768cc",
+    "storage_bucket": "travelgo-768cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:316798190783:android:73e8a9c8a1c72d7980b20a",
+        "android_client_info": {
+          "package_name": "ta.aldi.travelgo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "316798190783-8oruqttcfbso076n71v7vpq7urq9nmfb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVH_FfP7r7szmROjTj7QKiWqAWMjhqHEk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "316798190783-8oruqttcfbso076n71v7vpq7urq9nmfb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

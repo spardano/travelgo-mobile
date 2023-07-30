@@ -1,0 +1,28 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Verifikasi Email</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="lottie-container container">
+    <ng-lottie
+      width="100%"
+      containerClass="moving-box"
+      [options]="options">
+    </ng-lottie>
+  </div>
+  
+  <div class="desc container text-center">
+    <h3>Verifikasi Akun</h3>
+    <p>Kamu belum melakukan verifikasi akun, periksa kotak masuk email dan verifikasi</p>
+  </div>
+  
+  <div class="container text-center notif">
+    <p>Email Verifikasi Expired / Belum Masuk ? <a style="text-transform: none; color: blue; font-weight: bold;" (click)="sendEmailVerification()">Klik Disini</a> </p>
+  </div>
+  
+</ion-content>

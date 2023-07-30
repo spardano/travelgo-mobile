@@ -6,6 +6,8 @@ import { ShowHidePasswordComponent } from './show-hide-password/show-hide-passwo
 import { CardTicketComponent } from './card-ticket/card-ticket.component';
 import { CardBookingComponent } from './card-booking/card-booking.component';
 import { LogoComponent } from './logo/logo.component';
+import { BtnGoogleComponent } from './btn-google/btn-google.component';
+import { NoDataComponent } from './no-data/no-data.component';
 
 
 @NgModule({
@@ -13,7 +15,9 @@ import { LogoComponent } from './logo/logo.component';
     ShowHidePasswordComponent,
     CardTicketComponent,
     CardBookingComponent,
-    LogoComponent
+    LogoComponent,
+    BtnGoogleComponent,
+    NoDataComponent
               ],
   imports: [
     FormsModule,
@@ -25,7 +29,9 @@ import { LogoComponent } from './logo/logo.component';
     ShowHidePasswordComponent,
     CardTicketComponent,
     CardBookingComponent,
-    LogoComponent
+    LogoComponent,
+    BtnGoogleComponent,
+    NoDataComponent
           ]
 })
 export class SharedComponentsModule { }

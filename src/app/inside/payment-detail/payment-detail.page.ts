@@ -23,6 +23,7 @@ export class PaymentDetailPage implements OnInit {
   tk_biaya;
   ppn = 0;
   biayaAdmin = 6500;
+  // biayaAdmin = 0;
   totalTagihan = 0;
   isAlertOnSpot:boolean = false;
   paymentMethod = 'online';
@@ -148,14 +149,17 @@ export class PaymentDetailPage implements OnInit {
     }else{
       this.isAlertOnSpot = false;
       this.biayaAdmin = 6500;
+      // this.biayaAdmin = 0;
       this.hitungTotal();
     }
   }
 
   checkOut(){
+
+    this.helper.alertEverythingModal('loading', 'Memuat', 'Menyimpan Booking...');
     
     //simpan detail order dengan api
-    from(this.pemesanan.storeBooking(this.totalTagihan)).subscribe(res=>{
+    from(this.pemesanan.storeBooking(this.totalTagihan, this.tk_biaya)).subscribe(res=>{
       if(res['status']){
          //setelah berhasil disimpan direct ke pembayaran
           if(this.paymentMethod == 'online'){
@@ -163,11 +167,14 @@ export class PaymentDetailPage implements OnInit {
             //hapus storeage detail-booking
             Preferences.remove({key:'data-booking'});
 
+            this.helper.dismissLoadingModal();
+
             //direct ke payment gateway
             const paymentUrl = `${environment.base_url}/payment/`
             this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number'], true);
 
           }else{
+              this.helper.dismissLoadingModal();
               //lansung ke page notifikasi pemberitahuan berhasil membeli tiket
               this.router.navigate([`payment-gateway/${res['payment_number']}`], {replaceUrl:true});
           }

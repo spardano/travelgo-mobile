@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { from } from 'rxjs';
+import { HelperService } from 'src/app/services/helper.service';
 import { ListbookingService } from 'src/app/services/listbooking.service';
 
 @Component({
@@ -11,9 +12,11 @@ export class OrderPage implements OnInit {
   user:any = {};
   data_booking:any;
 
-  constructor(private mybooking: ListbookingService ) { }
+  constructor(private mybooking: ListbookingService,
+              private helper: HelperService ) { }
 
   ngOnInit() {
+    this.helper.alertEverythingModal('loading', 'Memuat', 'Sedang Memuat...');
     this.getMyBooking();
   }
 
@@ -22,6 +25,10 @@ export class OrderPage implements OnInit {
       if(res['status']){
         this.data_booking = res['data'];
         console.log(this.data_booking);
+        this.helper.dismissLoadingModal();
+      }else{
+        this.helper.dismissLoadingModal();
+        this.data_booking = null;
       }
     })
   }

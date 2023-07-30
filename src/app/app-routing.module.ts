@@ -25,6 +25,34 @@ const routes: Routes = [
     loadChildren: () => import('./modal/detail-jadwal-drawer/detail-jadwal-drawer.module').then( m => m.DetailJadwalDrawerPageModule)
   },
   {
+    path: 'choose-location',
+    loadChildren: () => import('./modal/choose-location/choose-location.module').then( m => m.ChooseLocationPageModule)
+  },
+  {
+    path: 'payment-complete',
+    loadChildren: () => import('./inside/payment-complete/payment-complete.module').then( m => m.PaymentCompletePageModule)
+  },
+  {
+    path: 'detail-booking-drawer',
+    loadChildren: () => import('./modal/detail-booking-drawer/detail-booking-drawer.module').then( m => m.DetailBookingDrawerPageModule)
+  },
+  {
+    path: 'form-refund/:id',
+    loadChildren: () => import('./inside/form-refund/form-refund.module').then( m => m.FormRefundPageModule)
+  },
+  {
+    path: 'akun',
+    loadChildren: () => import('./inside/akun/akun.module').then( m => m.AkunPageModule)
+  },
+  {
+    path: 'alert',
+    loadChildren: () => import('./modal/alert/alert.module').then( m => m.AlertPageModule)
+  },
+  {
+    path: 'verify-notification/:email',
+    loadChildren: () => import('./pages/verify-notification/verify-notification.module').then( m => m.VerifyNotificationPageModule)
+  },
+  {
     path: '',
     loadChildren: () => import('./inside/tabs/tabs.module').then( m => m.TabsPageModule),
     canLoad: [AuthenticationGuard]
@@ -44,29 +72,6 @@ const routes: Routes = [
     loadChildren: () => import('./inside/payment-gateway/payment-gateway.module').then( m => m.PaymentGatewayPageModule),
     canLoad: [AuthenticationGuard]
   },
-  {
-    path: 'choose-location',
-    loadChildren: () => import('./modal/choose-location/choose-location.module').then( m => m.ChooseLocationPageModule)
-  },
-  {
-    path: 'payment-complete',
-    loadChildren: () => import('./inside/payment-complete/payment-complete.module').then( m => m.PaymentCompletePageModule)
-  },
-  {
-    path: 'detail-booking-drawer',
-    loadChildren: () => import('./modal/detail-booking-drawer/detail-booking-drawer.module').then( m => m.DetailBookingDrawerPageModule)
-  },
-  {
-    path: 'form-refund/:id',
-    loadChildren: () => import('./inside/form-refund/form-refund.module').then( m => m.FormRefundPageModule)
-  },  {
-    path: 'akun',
-    loadChildren: () => import('./inside/akun/akun.module').then( m => m.AkunPageModule)
-  },
-
-
-
-
 
 ];
 

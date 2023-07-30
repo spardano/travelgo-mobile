@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { validation_messages_register } from 'src/app/messages/error-message';
 import { AuthenticationService } from 'src/app/services/authentication.service';
+import { HelperService } from 'src/app/services/helper.service';
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterPage implements OnInit {
   validation_messages = validation_messages_register;
   
   constructor(private fb: FormBuilder,
-              private auth: AuthenticationService) { }
+              private auth: AuthenticationService,
+              private helper: HelperService) { }
 
   ngOnInit() {
     this.RegisterData = this.fb.group({
@@ -48,6 +50,7 @@ export class RegisterPage implements OnInit {
   }
 
   register(){
+    this.helper.alertEverythingModal('loading', 'Register', 'Sedang mendaftar...');
     this.auth.register(this.RegisterData.value).subscribe();
   }
 

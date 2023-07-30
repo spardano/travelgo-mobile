@@ -1,0 +1,60 @@
+.content{
+    text-align: center;
+}
+
+.text-layout{
+    padding: 20px;
+    padding-top: 0;
+    img{
+        margin-top: 25px;
+        width:250px;
+    }
+
+    h4{
+        width: 100%;
+        font-weight: bold;
+        font-family: 'Roboto-Thin';
+    }
+
+    p{
+        font-family: 'Roboto-Thin';
+        font-size: 14px;
+        color: gray;
+    }
+}
+
+
+
+ion-button{
+    --background: var(--ion-color-danger-shade);
+}
+
+.img-loading{
+    padding: 20px;
+    text-align: center;
+    img{
+        width: 40%;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+}
+
+.content-container{
+    margin-top: 20px;
+    position: relative;
+}
+
+.lottie-container{
+    position: relative;
+    width: 60%;
+    left: 32%;
+    top: 50%;
+}
+
+.button-action{
+    position: fixed;
+    bottom: 20px;
+    text-align: center;
+    padding: 10px;
+    width: 86%;
+}

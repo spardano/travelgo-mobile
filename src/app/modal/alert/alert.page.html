@@ -1,0 +1,35 @@
+<ion-content>
+
+
+  <div class="content">
+  
+
+    <div class="content-container">
+      <div class="lottie-container">
+            <ng-lottie
+            width="60%"
+            containerClass="moving-box"
+            [options]="options">
+          </ng-lottie>
+      </div>
+
+      <div class="text-layout">
+        <h4>{{data.header}}</h4>
+        <p>{{data.text}}</p>
+
+        <div class="button-action" *ngIf="data.action != 'none'">
+          <ion-button (click)="actionButton(data.action)" expand="block" fill="solid" shape="round">
+            Ok
+          </ion-button>
+        </div>
+
+      </div>
+    </div>
+
+    
+    
+    
+
+  </div>
+
+</ion-content>

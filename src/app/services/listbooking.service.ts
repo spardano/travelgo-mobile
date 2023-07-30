@@ -32,6 +32,7 @@ export class ListbookingService {
 
     return this.http.post(`${environment.base_api}/pemesanan/get-booking`, body, httpOptions).pipe(
       tap(res=>{
+        this.helper.dismissLoadingModal();
         if(!res['status']){
           this.helper.showToast(res['message'], 'danger');
         }

@@ -13,7 +13,8 @@ export class LoginPage implements OnInit {
   credential: FormGroup;
 
   constructor(private fb: FormBuilder,
-              private auth: AuthenticationService) { }
+              private auth: AuthenticationService,
+              private helper: HelperService) { }
 
   ngOnInit() {
     this.credential = this.fb.group({
@@ -23,7 +24,9 @@ export class LoginPage implements OnInit {
   }
 
   async login(){
+    this.helper.alertEverythingModal('loading', 'Login', 'Sedang Memuat...');
     this.auth.login(this.credential.value).subscribe(_=>{
+     
     });
   }
 

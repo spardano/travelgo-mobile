@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package ta.aldi.travelgo;
 
 import com.getcapacitor.BridgeActivity;
 

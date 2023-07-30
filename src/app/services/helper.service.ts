@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { LoadingController, ToastController } from '@ionic/angular';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
 import { InAppBrowser, InAppBrowserOptions } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { Router } from '@angular/router';
+import { AlertPage } from '../modal/alert/alert.page';
 
 @Injectable({
   providedIn: 'root'
@@ -31,7 +32,8 @@ export class HelperService {
   constructor(private toast: ToastController,
               private iab: InAppBrowser,
               private router: Router,
-              private loadingController: LoadingController ) { }
+              private loadingController: LoadingController,
+              private modalCtrl: ModalController ) { }
 
 
   async showToast(msg, color){
@@ -88,30 +90,58 @@ export class HelperService {
       });
     }
 
-      // Auto hide show loader
-      autoLoader() {
-        this.loadingController.create({
-          message: 'Loader hides after 4 seconds',
-          duration: 4000
-        }).then((response) => {
-          response.present();
-          response.onDidDismiss().then((response) => {
-            console.log('Loader dismissed', response);
-          });
+    // Auto hide show loader
+    autoLoader() {
+      this.loadingController.create({
+        message: 'Loader hides after 4 seconds',
+        duration: 4000
+      }).then((response) => {
+        response.present();
+        response.onDidDismiss().then((response) => {
+          console.log('Loader dismissed', response);
         });
-      } 
+      });
+    } 
 
-      // Custom style + hide on tap loader
-      customLoader() {
-        this.loadingController.create({
-          message: 'Loader with custom style',
-          duration: 4000,
-          cssClass:'loader-css-class',
-          backdropDismiss:true
-        }).then((res) => {
-          res.present();
-        });
+    // Custom style + hide on tap loader
+    customLoader() {
+      this.loadingController.create({
+        message: 'Loader with custom style',
+        duration: 4000,
+        cssClass:'loader-css-class',
+        backdropDismiss:true
+      }).then((res) => {
+        res.present();
+      });
+    }
+
+
+    async dismissLoadingModal(){
+      this.modalCtrl.getTop().then(v => v ? this.modalCtrl.dismiss() : null);
+      // this.modalCtrl.dismiss();
+    }
+
+
+    async alertEverythingModal(type, header, text="", action="none", route='/'){
+  
+      var data = {
+        type: type,
+        header: header,
+        text: text,
+        action: action,
+        route: route
       }
-
+  
+      const modal = await this.modalCtrl.create({
+        component: AlertPage,
+        cssClass: 'select-alert',
+        backdropDismiss: false,
+        componentProps: {
+          data: data,
+        },
+      });
+  
+      modal.present();
+    }
 
 }

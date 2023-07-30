@@ -1,13 +1,10 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { delay, from } from 'rxjs';
 import { HelperService } from 'src/app/services/helper.service';
 import { PaymentGatewayService } from 'src/app/services/payment-gateway.service';
 import { environment } from 'src/environments/environment';
 import { AnimationOptions } from 'ngx-lottie';
-import * as snap from '../../../assets/js/snap.js';
 
 @Component({
   selector: 'app-payment-gateway',

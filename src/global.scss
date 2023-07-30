@@ -35,6 +35,15 @@
     }
 }
 
+.select-alert {
+    background: rgba(0, 0, 0, 0.5) !important;
+    padding: 60% 10%  !important;
+
+    &::part(content) {
+        border-radius: 20px !important;
+    }
+}
+
 ion-toolbar{
     padding-top: env(safe-area-inset-top);
     --background: var(--primary-gradient);

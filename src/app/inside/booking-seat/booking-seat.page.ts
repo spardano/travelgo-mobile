@@ -30,6 +30,7 @@ export class BookingSeatPage implements OnInit {
               private r: ActivatedRoute) { }
 
   ngOnInit() {
+    this.helper.alertEverythingModal('loading', 'Memuat', 'Sedang Memuat...');
     this.get_bangku();
   }
 
@@ -41,6 +42,8 @@ export class BookingSeatPage implements OnInit {
         console.log(this.seatLayout);
         
         this.maxColumnLayout = 12 / this.seatLayout.jumlah_kolom;
+
+        this.helper.dismissLoadingModal();
       }
     });
   }

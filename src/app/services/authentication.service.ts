@@ -6,7 +6,7 @@ import { HelperService } from './helper.service';
 import { catchError, delay, tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
-
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 export const ACCESS_TOKEN_KEY = 'auth-access-token';
 export const USER_LOGIN_KEY = 'user-login-key';
@@ -29,7 +29,8 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient,
               private help: HelperService,
-              private router: Router) { }
+              private router: Router,
+              private google: GooglePlus,) { }
 
 
    //cek token
@@ -51,7 +52,7 @@ export class AuthenticationService {
     const httpOptions = {
       headers: new HttpHeaders({
        'Content-Type': 'application/json',
-       'ngrok-skip-browser-warning': 'true',
+      //  'ngrok-skip-browser-warning': 'true',
       })
     }
 
@@ -102,17 +103,23 @@ export class AuthenticationService {
       return this.http.post(`${this.url}/guest/login`, credentials)
         .pipe(
           tap(res => {
+            this.help.dismissLoadingModal();
+
             if(res['status']){
               this.currentAccessToken = res['access_token'];
-              // this.getUserLogin(this.currentAccessToken);
               this.isAuthenticated.next(true);
               this.getUserLogin(res['access_token']);
               this.help.showToast("Berhasil login, Selamat Datang!", 'success');
             }else{
-              this.help.showToast(res['message'], 'danger');
+              if(res['code'] == 'unverified'){
+                this.router.navigate([`verify-notification/${credentials.email}`], {replaceUrl:true});
+              }else{
+                this.help.showToast(res['message'], 'danger');
+              }
             }
           }),
           catchError(e => {
+            this.help.dismissLoadingModal();
             console.log(e.message);
             throw new Error(e.message);
           })
@@ -120,13 +127,45 @@ export class AuthenticationService {
     }
 
 
+   loginViaGoogle(googleData){
+
+    return this.http.post(`${this.url}/guest/login-via-google`, googleData)
+      .pipe(
+        tap(res=>{
+          this.help.dismissLoadingModal();
+          if(res['status']){
+            this.currentAccessToken = res['access_token'];
+            this.getUserLogin(this.currentAccessToken);
+          }else{
+            this.help.alertEverythingModal('failed', 'Gagal', 'Gagal login dengan google');
+          }
+        }),
+        catchError(e => {
+          this.help.dismissLoadingModal();
+          console.log(e.message);
+          this.disconnectFromGoogle();
+          throw new Error(e.message);
+        })
+      )
+  }
+
+  async disconnectFromGoogle() {
+    try {
+      await this.google.disconnect();
+      console.log('Disconnected from Google');
+      // TODO: Do something after disconnect
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
        //getUserLogin
    getUserLogin(token){
 
     const httpOptions = {
       headers: new HttpHeaders({
        'Content-Type': 'application/json',
-       'ngrok-skip-browser-warning': 'true',
+      //  'ngrok-skip-browser-warning': 'true',
         Authorization: `${token}`
       })
     }
@@ -165,14 +204,13 @@ export class AuthenticationService {
            }
 
            this.login(credentials_login).subscribe(_ =>{
-            //  this.compService.dismissLoadingModal();
            });
 
+           this.help.dismissLoadingModal();
            this.help.showToast(res['message'], 'success');
 
          }else{
-          //  this.compService.dismissLoadingModal();
-          //  this.compService.alertEverythingModal('failed', 'Kesalahan', res['message'], 'ok')
+          this.help.dismissLoadingModal();
           this.help.showToast(res['message'], 'danger');
         }
       }),
@@ -186,7 +224,8 @@ export class AuthenticationService {
    
    logout(){
     Preferences.clear();
-    this.router.navigate(['login'])
+    this.disconnectFromGoogle();
+    this.router.navigate(['/home'], {replaceUrl:true});
    }
 
    async editnumber(nomebaru) {
@@ -244,6 +283,28 @@ export class AuthenticationService {
         throw new Error(e.message);
       })
     ).toPromise();
+  }
+
+
+  resendEmailVerification(email){
+    const body = {
+      email:email
+    }
+
+    return this.http.post(`${environment.base_api}/guest/resend-email-verification`, body).pipe(
+      tap(res=>{
+        this.help.dismissLoadingModal();
+        if(!res['status']){
+          this.help.showToast(res['message'], 'danger');
+        }else{
+          this.help.showToast(res['message'], 'success');
+        }
+      }),
+      catchError(e =>{
+        this.help.dismissLoadingModal();
+        throw new Error(e.message);
+      })
+    )
   }
 
 

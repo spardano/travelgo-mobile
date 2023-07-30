@@ -12,6 +12,7 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import { LottieModule } from 'ngx-lottie';
 import player from 'lottie-web';
 import { NativeGeocoder, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
+import { GooglePlus } from '@ionic-native/google-plus/ngx';
 
 
 export function playerFactory(){
@@ -21,7 +22,7 @@ export function playerFactory(){
 @NgModule({
   declarations: [AppComponent],
   imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, LottieModule.forRoot({player:playerFactory}),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Storage, InAppBrowser, NativeGeocoder],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Storage, InAppBrowser, NativeGeocoder, GooglePlus],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

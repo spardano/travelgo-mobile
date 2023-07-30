@@ -14,7 +14,7 @@ export class PemesananService {
   constructor(private http: HttpClient,
               private helper: HelperService) { }
 
-  async storeBooking(total_harga){
+  async storeBooking(total_harga, tk_biaya){
     const res = await Preferences.get({key: ACCESS_TOKEN_KEY});
     const token = res.value;
     const res_p = await Preferences.get({key: 'data-booking'});
@@ -29,7 +29,8 @@ export class PemesananService {
 
     const body = {
       'detail_booking': detail_booking,
-      'total_harga': total_harga
+      'total_harga': total_harga,
+      'tk_biaya': tk_biaya
     };
 
     return this.http.post(`${environment.base_api}/pemesanan/store-booking`, body, httpOptions).pipe(

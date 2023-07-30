@@ -6,15 +6,11 @@ export const environment = {
   production: false,
 
   //ngrok
-  // base_url: 'https://cc36-114-10-87-174.ngrok-free.app',
-  // base_api: 'https://cc36-114-10-87-174.ngrok-free.app/api',
+  base_url: 'https://jmtravel.pocari.id',
+  base_api: 'https://jmtravel.pocari.id/api',
   //travel go webservice
-  // base_api: 'http://172.25.208.1:8000/api',
-  base_url: 'http://web-travelgo.test',
-  base_api: 'http://web-travelgo.test/api',
-  midtrans: 'https://cors-anywhere.herokuapp.com/https://app.sandbox.midtrans.com/snap/v1/transactions',
-  // midtrans: 'https://app.midtrans.com/snap/v1/transactions'
-  midtrans_server_key: 'SB-Mid-server-uRz8JBs6tWG-qoaf0sYEIaJD',
+  // base_url: 'http://web-travelgo.test',
+  // base_api: 'http://web-travelgo.test/api',
 };
 
 /*
