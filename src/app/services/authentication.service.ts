@@ -129,6 +129,8 @@ export class AuthenticationService {
 
    loginViaGoogle(googleData){
 
+    this.help.alertEverythingModal('loading', 'Memuat', 'Tunggu Sebentar...', 'none');
+
     return this.http.post(`${this.url}/guest/login-via-google`, googleData)
       .pipe(
         tap(res=>{
@@ -137,7 +139,7 @@ export class AuthenticationService {
             this.currentAccessToken = res['access_token'];
             this.getUserLogin(this.currentAccessToken);
           }else{
-            this.help.alertEverythingModal('failed', 'Gagal', 'Gagal login dengan google');
+            this.help.alertEverythingModal('failed', 'Gagal', 'Gagal login dengan google', 'ok');
           }
         }),
         catchError(e => {

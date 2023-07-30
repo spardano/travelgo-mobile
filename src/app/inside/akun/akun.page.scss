@@ -1,20 +1,19 @@
-.profile-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-}
 
 .profile-header {
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .profile-header ion-avatar {
-    width: 150px;
-    height: 150px;
+    width: 100px;
+    height: 100px;
+}
+
+.input1{
+    border: 1px solid gray;
 }
 
 .profile-header h2 {

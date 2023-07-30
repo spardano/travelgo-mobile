@@ -28,7 +28,7 @@ export class BtnGoogleComponent  implements OnInit {
         user_id: res.userId
       }
 
-      this.helper.alertEverythingModal('loading', 'Memuat', 'Tunggu Sebentar...', 'none');
+      
       this.auth.loginViaGoogle(googleObject).subscribe();
 
     }).catch(err => {
