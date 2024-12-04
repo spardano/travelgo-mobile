@@ -160,21 +160,18 @@ export class PaymentDetailPage implements OnInit {
     
     //simpan detail order dengan api
     from(this.pemesanan.storeBooking(this.totalTagihan, this.tk_biaya)).subscribe(res=>{
+      this.helper.dismissLoadingModal();
       if(res['status']){
          //setelah berhasil disimpan direct ke pembayaran
           if(this.paymentMethod == 'online'){
-
             //hapus storeage detail-booking
             Preferences.remove({key:'data-booking'});
-
-            this.helper.dismissLoadingModal();
 
             //direct ke payment gateway
             const paymentUrl = `${environment.base_url}/payment/`
             this.helper.openWithCordovaBrowser(paymentUrl+res['payment_number'], true);
 
           }else{
-              this.helper.dismissLoadingModal();
               //lansung ke page notifikasi pemberitahuan berhasil membeli tiket
               this.router.navigate([`payment-gateway/${res['payment_number']}`], {replaceUrl:true});
           }

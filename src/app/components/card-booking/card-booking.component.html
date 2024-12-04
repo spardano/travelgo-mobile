@@ -1,13 +1,14 @@
 
 <ion-card>
-    <img alt="No thumbnail" src="{{data_booking.thumbnail}}" />
+    <img style="object-fit: cover; width: 100%;" alt="No thumbnail" src="{{data_booking.thumbnail}}" />
     <ion-card-header>
     <ion-card-subtitle>
         <ion-badge color="warning" *ngIf="data_booking.status == 1">Booking</ion-badge>
         <ion-badge color="success" *ngIf="data_booking.status == 2">Konfirm</ion-badge>
         <ion-badge color="medium" *ngIf="data_booking.status == 3">Expired</ion-badge>
         <ion-badge color="danger" *ngIf="data_booking.status == 4">Batal</ion-badge>
-        <ion-badge color="success" *ngIf="data_booking.status == 5">Redund</ion-badge>
+        <ion-badge color="secondary" *ngIf="data_booking.status == 5">Proses-Refund</ion-badge>
+        <ion-badge style="background-color: brown;" *ngIf="data_booking.status == 6">Refund</ion-badge>
     </ion-card-subtitle>
       <ion-card-title>{{data_booking.nama_trayek}}</ion-card-title>
     </ion-card-header>

@@ -52,7 +52,6 @@ export class AuthenticationService {
     const httpOptions = {
       headers: new HttpHeaders({
        'Content-Type': 'application/json',
-      //  'ngrok-skip-browser-warning': 'true',
       })
     }
 
@@ -66,6 +65,7 @@ export class AuthenticationService {
           this.loadUser();
         }
       }),catchError(e =>{
+        this.help.dismissLoadingModal();
         console.log('Error : '+e.message);
         throw new Error(e.message);
       })
@@ -78,7 +78,7 @@ export class AuthenticationService {
     Preferences.remove({key:ACCESS_TOKEN_KEY});
     Preferences.remove({key:USER_LOGIN_KEY});
     this.isAuthenticated.next(false);
-    this.router.navigateByUrl('home-guest');
+    this.router.navigateByUrl('home-guest', {replaceUrl:true});
   }
 
 
@@ -167,13 +167,13 @@ export class AuthenticationService {
     const httpOptions = {
       headers: new HttpHeaders({
        'Content-Type': 'application/json',
-      //  'ngrok-skip-browser-warning': 'true',
         Authorization: `${token}`
       })
     }
 
     this.http.get(`${this.url}/user/getuser`, httpOptions).pipe(
       tap(res => {
+        this.help.dismissLoadingModal();
         if(res['status']){
             const user = res['data'];
             this.isAuthenticated.next(true);
@@ -186,6 +186,7 @@ export class AuthenticationService {
           this.help.showToast('Data tidak ditemukan', 'danger')
         }
       }),catchError(e=>{
+        this.help.dismissLoadingModal();
         throw new Error(e.message);
       })
     ).subscribe();
@@ -195,6 +196,7 @@ export class AuthenticationService {
    register(newUser){
     return this.http.post(`${this.url}/guest/register`, newUser).pipe(
       tap(res=>{
+        this.help.dismissLoadingModal();
         if(res['status']){
            const user = res['data'];
            console.log(newUser);
@@ -208,16 +210,14 @@ export class AuthenticationService {
            this.login(credentials_login).subscribe(_ =>{
            });
 
-           this.help.dismissLoadingModal();
            this.help.showToast(res['message'], 'success');
 
          }else{
-          this.help.dismissLoadingModal();
           this.help.showToast(res['message'], 'danger');
         }
       }),
       catchError(e=>{
-      //  this.compService.dismissLoadingModal();
+       this.help.dismissLoadingModal();
        console.log(e.message);
        throw new Error(e.message)
       })
@@ -253,6 +253,7 @@ export class AuthenticationService {
         }
       }),
       catchError(e =>{
+        this.help.dismissLoadingModal();
         throw new Error(e.message);
       })
     ).toPromise();
@@ -282,6 +283,7 @@ export class AuthenticationService {
         }
       }),
       catchError(e =>{
+        this.help.dismissLoadingModal();
         throw new Error(e.message);
       })
     ).toPromise();

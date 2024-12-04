@@ -22,13 +22,10 @@ export class CardBookingComponent  implements OnInit {
               private router: Router,
               private pemesanan: PemesananService,
               private helper: HelperService,
-              private r: ActivatedRoute,
-              private loc: Location,
               private loadingController: LoadingController,
               private alertController: AlertController) { }
 
   ngOnInit() {
-    // console.log(this.data_booking)
   }
 
   async openDetailBooking(data){

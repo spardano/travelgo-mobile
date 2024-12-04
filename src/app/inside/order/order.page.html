@@ -10,24 +10,16 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
-
+<ion-content>
     <div class="container">
-
         <ng-container *ngIf="data_booking == null">
             <app-no-data></app-no-data>
         </ng-container>
 
         <div class="list-jadwal">
-            
-
             <ion-list *ngIf="data_booking?.length != 0">
                 <app-card-booking *ngFor="let data of data_booking " [data_booking]="data"></app-card-booking>
             </ion-list>
         </div>
     </div>
-
-
 </ion-content>
-<!-- *ngFor="let data of data_jadwal " [data_tiket]="data " -->

@@ -40,6 +40,7 @@ export class PemesananService {
         }
       }),
       catchError(e =>{
+        this.helper.dismissLoadingModal();
         throw new Error(e.message);
       })
     ).toPromise();
@@ -67,6 +68,7 @@ export class PemesananService {
         }
       }),
       catchError(e =>{
+        this.helper.dismissLoadingModal();
         throw new Error(e.message);
       })
     ).toPromise();
@@ -98,6 +100,7 @@ export class PemesananService {
         }
       }),
       catchError(e=>{
+        this.helper.dismissLoadingModal();
         throw new Error(e.message);
       })
     ).toPromise();
